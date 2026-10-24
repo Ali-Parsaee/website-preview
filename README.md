@@ -1,57 +1,33 @@
-# Ali Parsaee - Personal Website
+# Ali Parsaee — website design lab
 
-This repository contains the source code for my personal website showcasing my work as a Machine Learning Researcher and Engineer.
+A local redesign for PhD committees and research hiring, organized around the value of information.
 
-## Website Features
+## Preview
 
-- **Modern Responsive Design**: The website is built with modern CSS features including CSS variables, flexbox, and grid layouts. It's fully responsive and works well on mobile, tablet, and desktop devices.
+From this folder:
 
-- **Professional Sections**: Includes sections for:
-  - About Me
-  - Work Experience
-  - Research Work
-  - Projects
-  - Contact Information
+```sh
+python3 -m http.server 8090 --bind 127.0.0.1
+```
 
-- **Interactive Elements**: Incorporates subtle animations and hover effects for an engaging user experience.
+Open http://127.0.0.1:8090/. The page also works by opening `index.html` directly. No build step, external dependencies, analytics, or remote font requests.
 
-## Technical Details
+## Files
 
-- Built with pure HTML and CSS without relying on external frameworks
-- Uses FontAwesome for icons
-- Optimized for fast loading and performance
-- Mobile-first responsive design
+- `index.html`: homepage, all 14 research entries, writing, and background.
+- `style.css`: responsive layout, typography, print, and reduced-motion styles.
+- `site.js`: five interactive research themes, conceptual SVG figures, and research filters.
+- `Pics/Ali_Ferris_Wheel.jpg`: supplied portrait.
+- `blogpost1.html`: existing essay, retained unchanged.
+- `old-index.html` and `dial-index.html`: earlier designs, retained unchanged.
+- `.backups/`: local snapshots before this redesign (ignored by Git).
 
-## Structure
+The homepage has three levels: a plain-language research identity; an interactive map revealing explanations and conceptual figures; and optional mathematics and paper details. Research and professional background are accessible immediately.
 
-- `index.html` - Main website content
-- `blog.html` - Blog posts listing page
-- `blogpost1.html` - Individual blog post example
-- `Pics/` - Directory containing images used on the site
+Content is based on the supplied 2026-10-23 website brief. Status labels distinguish publications, preprints, work under review, work in preparation, and future directions. Only paper URLs supplied in the brief are linked. The figures are conceptual, not empirical results.
 
-## Development
+## Local-only workflow
 
-To work on this website locally:
+Work stays on branch `lab`. No deployment or publication was performed. Ali decides what goes live.
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/yoguy12345/Personal_Website.git
-   ```
-
-2. Open the project in your favorite code editor
-
-3. Preview by opening `index.html` in a web browser
-
-## Deployment
-
-The website is deployed using GitHub Pages and can be accessed at: [https://ali-parsaee.github.io/](https://ali-parsaee.github.io/)
-
-## License
-
-All rights reserved. This code may not be used commercially without explicit permission.
-
-## Contact
-
-For any questions or suggestions regarding this website, please contact me at:
-- Email: aparsaee99@gmail.com
-- LinkedIn: [Ali Parsaee](https://www.linkedin.com/in/ali-parsaee/) 
+Browser checks covered all five themes, all seven filters, 14 paper disclosures, arrow-key navigation, anchor targets, the portrait, and horizontal overflow at widths 320, 390, 768, 1024, 1440, and 1920. Desktop and mobile screenshots were visually reviewed. QA artifacts are outside this checkout at `~/Library/Caches/obsidian-buddy/website-qa/`.

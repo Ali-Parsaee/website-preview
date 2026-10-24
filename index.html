@@ -1,240 +1,114 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ali Parsaee — the value of information</title>
-<meta name="description" content="Ali Parsaee, machine learning researcher at MD Anderson Cancer Center. I study the value of information: what a piece of information is worth before you pay for it.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#faf8f3;--ink:#1c1d21;--ink2:#4a4d57;--ink3:#8b8e99;--line:#e6e1d6;--card:#fffdf8;--accent:#0f766e;--accent2:#b45309;--soft:#e4efec;
-  --serif:Newsreader,Georgia,"Times New Roman",serif;--sans:Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
-@media (prefers-color-scheme:dark){:root{--bg:#121316;--ink:#ecebe6;--ink2:#b9b8b2;--ink3:#7f7f86;--line:#2a2b30;--card:#18191d;--accent:#5eead4;--accent2:#fbbf24;--soft:#16302c}}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
-main{max-width:820px;margin:0 auto;padding:64px 24px 120px}
-a{color:inherit;text-decoration-color:var(--line);text-underline-offset:3px}
-a:hover{text-decoration-color:var(--accent)}
-.who{display:flex;align-items:center;gap:18px}
-.who img{width:60px;height:60px;border-radius:50%;object-fit:cover;filter:saturate(.9)}
-h1{font:500 38px/1.1 var(--serif);margin:0;letter-spacing:-.3px}
-.role{color:var(--ink3);font-size:15px;margin-top:4px}
-.links{display:flex;flex-wrap:wrap;gap:18px;margin-top:18px;font-size:14.5px;color:var(--ink2)}
-.thesis{font:400 30px/1.3 var(--serif);margin:44px 0 6px;letter-spacing:-.2px}
-.thesis em{font-style:italic;color:var(--accent)}
-.gloss{font:italic 400 20px/1.45 var(--serif);color:var(--ink2);margin:0 0 10px}
-.nudge{font-size:13.5px;color:var(--ink3);margin:0 0 6px}
-/* the figure */
-.fig{width:100%;height:auto;display:block;margin:6px auto 0;max-width:760px;overflow:visible}
-.fig text{font-family:var(--sans);fill:var(--ink)}
-.fig .lbl{font-size:15px;font-weight:500}
-.fig .sub{font-size:11.5px;fill:var(--ink3)}
-.fig .q{font-family:var(--serif);font-style:italic;font-size:17px;fill:var(--ink2)}
-.fig .eq{font-family:var(--serif);font-style:italic;font-size:15px;fill:var(--ink)}
-.st{cursor:pointer}
-.st circle.c{fill:var(--card);stroke:var(--ink3);stroke-width:1.4;transition:stroke .3s,fill .3s,r .3s}
-.st:hover circle.c{stroke:var(--accent)}
-.st.seen circle.c{fill:var(--soft);stroke:var(--accent)}
-.st.on circle.c{stroke:var(--accent);stroke-width:2.4;fill:var(--soft)}
-.st .ic{stroke:var(--ink2);fill:none;stroke-width:1.5;transition:stroke .3s}
-.st:hover .ic,.st.seen .ic,.st.on .ic{stroke:var(--accent)}
-.flow{fill:none;stroke:var(--ink3);stroke-width:1.3;stroke-dasharray:3 5;opacity:.8}
-.flow.lit{stroke:var(--accent);stroke-dasharray:none;stroke-width:1.6;opacity:1}
-.head{fill:var(--ink3)}.head.lit{fill:var(--accent)}
-.ask{stroke-dasharray:2 4}
-.tagp{font-size:10.5px;fill:var(--accent2);font-weight:600;letter-spacing:1px}
-.progress{display:flex;gap:6px;align-items:center;justify-content:center;margin:4px 0 0;font-size:12.5px;color:var(--ink3)}
-.progress i{width:8px;height:8px;border-radius:50%;border:1px solid var(--ink3);display:inline-block;transition:background .3s,border-color .3s}
-.progress i.seen{background:var(--accent);border-color:var(--accent)}
-/* panels */
-.panel{display:none;margin-top:28px;border:1px solid var(--line);border-radius:18px;background:var(--card);padding:26px 28px;animation:rise .45s ease}
-.panel.on{display:block}
-@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.panel .top{display:grid;grid-template-columns:200px 1fr;gap:26px;align-items:start}
-.panel h2{font:500 28px/1.15 var(--serif);margin:0 0 6px}
-.panel .idea{font:400 19px/1.45 var(--serif);margin:0 0 12px}
-.panel .math{font:italic 400 18px/1.5 var(--serif);background:var(--bg);border-left:3px solid var(--accent);padding:8px 14px;margin:0 0 12px;overflow-x:auto}
-.panel .math small{display:block;font:13px var(--sans);color:var(--ink3);font-style:normal;margin-top:2px}
-.panel p{color:var(--ink2);font-size:15.5px;margin:0 0 10px}
-.mini{width:200px;height:150px;overflow:visible}
-.mini *{vector-effect:non-scaling-stroke}
-.mini .d{stroke-dasharray:400;stroke-dashoffset:400;animation:draw 1.2s ease forwards}
-@keyframes draw{to{stroke-dashoffset:0}}
-.mini text{font:11.5px var(--sans);fill:var(--ink3)}
-.papers{margin-top:16px;border-top:1px solid var(--line)}
-.paper{border-bottom:1px solid var(--line);padding:12px 0}
-.paper>button{all:unset;cursor:pointer;display:block;width:100%}
-.paper .pt{font:500 18px/1.35 var(--serif)}
-.paper .pv{font-size:13px;color:var(--ink3);margin-top:2px}
-.paper .pv i{font-style:normal;border:1px solid var(--line);border-radius:999px;padding:0 7px;margin-left:6px;font-size:11.5px}
-.paper .pg{color:var(--ink2);font-size:15px;margin-top:4px}
-.paper .more{font-size:15px;color:var(--ink2);padding-top:8px}
-.paper .more a{color:var(--accent)}
-.hide{display:none!important}
-.flagtag{font:600 10.5px var(--sans);letter-spacing:1.2px;text-transform:uppercase;color:var(--accent2);margin-left:10px;vertical-align:3px}
-/* the rest, earned */
-#rest{margin-top:70px;opacity:0;transform:translateY(10px);transition:opacity .9s ease,transform .9s ease;pointer-events:none}
-#rest.on{opacity:1;transform:none;pointer-events:auto}
-#rest h3{font:500 13px var(--sans);letter-spacing:1.6px;text-transform:uppercase;color:var(--ink3);margin:56px 0 18px}
-.path{list-style:none;padding:0;margin:0;border-left:2px solid var(--line)}
-.path li{position:relative;padding:0 0 18px 22px}
-.path li::before{content:"";position:absolute;left:-6px;top:9px;width:10px;height:10px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
-.path .y{font-size:13px;color:var(--ink3)}
-.path .w{font:500 19px/1.35 var(--serif)}
-.path .d{color:var(--ink2);font-size:15px}
-.loop{font:italic 20px/1.5 var(--serif);border-left:3px solid var(--accent);padding:4px 0 4px 18px;margin:0}
-.small{font-size:15px;color:var(--ink2)}
-.unlock{text-align:center;margin-top:56px;font:italic 15px var(--serif);color:var(--ink3)}
-.unlock button{all:unset;cursor:pointer;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
-footer{margin-top:80px;padding-top:24px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink3);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-@media (max-width:640px){.thesis{font-size:25px}.panel .top{grid-template-columns:1fr}.mini{width:100%;max-width:260px}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.mini .d{stroke-dashoffset:0}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ali Parsaee is a machine learning researcher at MD Anderson. Research on the value of information: learning from censored, costly, or incomplete observations.">
+  <meta name="theme-color" content="#f6f4ed">
+  <title>Ali Parsaee · The value of information</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="site.js" defer></script>
 </head>
 <body>
-<main>
-<header>
-  <div class="who"><img src="Pics/Ali_Ferris_Wheel.jpg" alt="Ali Parsaee"><div><h1>Ali Parsaee</h1><div class="role">Machine learning researcher · MD Anderson Cancer Center</div></div></div>
-  <nav class="links"><a href="mailto:aparsaee99@gmail.com">Email</a><a href="https://scholar.google.com/citations?user=w8uQCukAAAAJ">Google Scholar</a><a href="https://github.com/Ali-Parsaee">GitHub</a><a href="https://www.linkedin.com/in/ali-parsaee/">LinkedIn</a></nav>
+<a class="skip" href="#main">Skip to content</a>
+<div class="page">
+<header class="header">
+  <a class="identity" href="#" aria-label="Ali Parsaee, home"><span class="monogram" aria-hidden="true">ap.</span>Ali Parsaee</a>
+  <nav aria-label="Main navigation"><a href="#research">Research</a><a href="#writing">Writing</a><a href="#about">About</a><a class="contact-link" href="mailto:aparsaee99@gmail.com">Get in touch <span aria-hidden="true">↗</span></a></nav>
 </header>
+<main id="main">
+<section class="hero" aria-labelledby="hero-title">
+  <div class="intro">
+    <p class="eyebrow"><span class="dot"></span> Machine learning · MD Anderson</p>
+    <h1 id="hero-title">What is worth<br><em>knowing?</em></h1>
+    <p class="lead">I study the <strong>value of information</strong>: deciding what’s worth measuring, remembering, or asking when every bit of information has a price.</p>
+    <p class="regime">Learning from censored, costly, or incomplete observations.</p>
+    <div class="profile"><img src="Pics/Ali_Ferris_Wheel.jpg" alt="Ali Parsaee" width="56" height="56"><div><span>Researcher in Wenyi Wang’s group</span><span class="muted">Houston, Texas</span></div></div>
+    <div class="text-links"><a href="https://scholar.google.com/citations?user=w8uQCukAAAAJ">Google Scholar <span aria-hidden="true">↗</span></a><a href="https://github.com/Ali-Parsaee">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.linkedin.com/in/ali-parsaee/">LinkedIn <span aria-hidden="true">↗</span></a></div>
+  </div>
+  <figure class="atlas">
+    <div class="figure-top"><span>ONE QUESTION, FIVE DIRECTIONS</span><span>FIG. 01</span></div>
+    <div class="map" aria-label="Explore five directions of research">
+      <svg class="map-lines" viewBox="0 0 600 520" aria-hidden="true">
+        <defs><pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".7" fill="#46635c" opacity=".16"/></pattern></defs>
+        <rect width="600" height="520" fill="url(#dots)"/>
+        <g fill="none" stroke="#d7ddd4"><circle cx="300" cy="255" r="110"/><circle cx="300" cy="255" r="157" stroke-dasharray="2 6"/><circle cx="300" cy="255" r="205"/>
+          <path d="M300 60V450 M95 255H505" stroke-dasharray="2 7"/>
+        </g>
+        <g class="connections" fill="none" stroke="#9cafa5" stroke-width="1.1">
+          <path data-path="acquire" d="M300 255 Q235 153 300 70"/>
+          <path data-path="hold" d="M300 255 Q439 306 500 215"/>
+          <path data-path="price" d="M300 255 Q440 288 425 423"/>
+          <path data-path="spend" class="chosen" d="M300 255 Q183 281 175 423"/>
+          <path data-path="ask" d="M300 255 Q223 149 100 215"/>
+        </g>
+        <g fill="#a6b4a8"><circle cx="375" cy="64" r="3"/><circle cx="483" cy="345" r="3"/><circle cx="300" cy="460" r="3"/><circle cx="114" cy="341" r="3"/><circle cx="188" cy="83" r="3"/></g>
+        <circle cx="300" cy="255" r="7" fill="#b15b3e"/><circle cx="300" cy="255" r="16" fill="none" stroke="#b15b3e" opacity=".3"/>
+      </svg>
+      <div class="map-center"><span>INFORMATION</span><span class="center-question">What changes<br>the decision?</span><span class="center-bottom">VALUE ≠ VOLUME</span></div>
+      <button class="map-node acquire" data-topic="acquire" aria-pressed="false" aria-controls="topic-panel"><span class="node-index">01</span><strong>Acquire</strong><small>Combine signals</small></button>
+      <button class="map-node hold" data-topic="hold" aria-pressed="false" aria-controls="topic-panel"><span class="node-index">02</span><strong>Hold</strong><small>Keep useful detail</small></button>
+      <button class="map-node price" data-topic="price" aria-pressed="false" aria-controls="topic-panel"><span class="node-index">03</span><strong>Price</strong><small>Measure what transfers</small></button>
+      <button class="map-node spend" data-topic="spend" aria-pressed="true" aria-controls="topic-panel"><span class="node-index">04 · CURRENT FOCUS</span><strong>Spend</strong><small>Choose the experiment</small></button>
+      <button class="map-node ask" data-topic="ask" aria-pressed="false" aria-controls="topic-panel"><span class="node-index">05</span><strong>Ask</strong><small>Know when to defer</small></button>
+    </div>
+    <figcaption><span class="figure-prompt"><span aria-hidden="true">↖</span> Choose a direction to look closer</span><span class="figure-note">A map of my research</span></figcaption>
+  </figure>
+</section>
 
-<p class="thesis">I study the <em>value of information</em>.</p>
-<p class="gloss">What is a piece of information worth, before you pay for it? Here is how I see it.</p>
-<p class="nudge">A piece of information has a life. Click a station to open it.</p>
+<section class="explorer" id="topic-panel" aria-labelledby="topic-title">
+  <div class="topic-copy" aria-live="polite" aria-atomic="true">
+    <p class="eyebrow" id="topic-kicker">04 / SPEND · CURRENT FOCUS</p>
+    <h2 id="topic-title">Which observation is worth paying for?</h2>
+    <p id="topic-description">In a clinical study, an outcome may not have happened when follow-up ends. We know something, but not everything. I study how to spend a limited budget on the observations that matter most.</p>
+    <a href="#research" id="topic-papers" data-filter-target="spend">Explore this work <span aria-hidden="true">↓</span></a>
+  </div>
+  <div class="topic-visual">
+    <div id="topic-drawing"></div>
+    <details class="math-detail"><summary>The idea, more precisely <span aria-hidden="true">+</span></summary><div id="topic-math"><p>Choose follow-up decisions <i>S</i> to maximize their information value, subject to a budget <i>B</i>.</p><p class="equation">maximize I(S) &nbsp; subject to &nbsp; Σ cost(i) ≤ B</p><p>In my master’s thesis, a maximum-coverage formulation gives a (1 − 1/e) approximation guarantee for the corresponding batch selection problem.</p></div></details>
+  </div>
+</section>
 
-<svg class="fig" viewBox="0 0 760 430" id="fig" role="img" aria-label="The life of a piece of information: acquired, held, priced, spent, with asking on the side">
-  <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="head"/></marker>
-        <marker id="ahl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="head lit"/></marker></defs>
-  <!-- the world, left; the decision, right -->
-  <text x="40" y="214" class="sub" text-anchor="middle">the world</text>
-  <g class="flow" id="f-world"><path d="M70 214 Q110 214 148 203" marker-end="url(#ah)"/></g>
-  <!-- loop arrows -->
-  <path id="f1" class="flow" d="M214 170 Q260 112 318 92" marker-end="url(#ah)"/>
-  <path id="f2" class="flow" d="M414 92 Q472 112 518 170" marker-end="url(#ah)"/>
-  <path id="f3" class="flow" d="M548 246 Q540 300 480 334" marker-end="url(#ah)"/>
-  <path id="f4" class="flow" d="M372 356 Q300 356 240 318" marker-end="url(#ah)"/>
-  <path id="f5" class="flow" d="M220 246 Q195 300 192 320" marker-end="url(#ah)" style="display:none"/>
-  <!-- center: the rule -->
-  <text x="380" y="200" class="q" text-anchor="middle">pay for information only when</text>
-  <text x="380" y="228" class="eq" text-anchor="middle">value of knowing  >  price of finding out</text>
-  <text x="380" y="252" class="sub" text-anchor="middle">every station below is this rule, asked somewhere new</text>
-  <!-- stations -->
-  <g class="st" data-s="acquire" transform="translate(180,205)"><circle class="c" r="36"/><g class="ic"><circle cx="-9" cy="-6" r="3"/><circle cx="3" cy="-11" r="3"/><circle cx="12" cy="-2" r="3"/><circle cx="-4" cy="8" r="3"/><circle cx="9" cy="10" r="3"/></g><text class="lbl" y="60" text-anchor="middle">Acquire</text><text class="sub" y="76" text-anchor="middle">getting it</text></g>
-  <g class="st" data-s="hold" transform="translate(366,80)"><circle class="c" r="36"/><g class="ic"><rect x="-12" y="-13" width="24" height="5" rx="1.5"/><rect x="-9" y="-3" width="18" height="5" rx="1.5" opacity=".7"/><rect x="-6" y="7" width="12" height="5" rx="1.5" opacity=".4"/></g><text class="lbl" y="-50" text-anchor="middle">Hold</text><text class="sub" y="-36" text-anchor="middle">keeping it</text></g>
-  <g class="st" data-s="price" transform="translate(552,205)"><circle class="c" r="36"/><g class="ic"><path d="M0 -13v26M-11 -7h22"/><path d="M-11 -7l-5 10h10zM11 -7l-5 10h10z"/></g><text class="lbl" y="60" text-anchor="middle">Price</text><text class="sub" y="76" text-anchor="middle">what it's worth</text></g>
-  <g class="st" data-s="spend" transform="translate(412,356)"><circle class="c" r="36"/><g class="ic"><circle cx="-8" cy="0" r="6"/><path d="M0 0h16m-4 -4 4 4-4 4"/></g><text class="lbl" y="60" text-anchor="middle">Spend</text><text class="sub" y="76" text-anchor="middle">using a budget well</text><text class="tagp" y="-48" text-anchor="middle">FLAGSHIP</text></g>
-  <g class="st" data-s="ask" transform="translate(200,356)"><circle class="c" r="36"/><g class="ic"><path d="M-12 -9h18a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-7l-5 4v-4h-6a3 3 0 0 1-3-3v-7a3 3 0 0 1 3-3z"/><path d="M-5 -4.5a2.5 2.5 0 1 1 3 2.4V-1m0 2.5v.1"/></g><text class="lbl" y="60" text-anchor="middle">Ask</text><text class="sub" y="76" text-anchor="middle">when to buy a hint</text></g>
-  <!-- the decision, right -->
-  <path class="flow" d="M590 205 Q640 205 690 205" marker-end="url(#ah)"/>
-  <text x="722" y="210" class="sub" text-anchor="middle">a decision</text>
-</svg>
-<div class="progress" id="prog"><span>opened</span><i data-p="acquire"></i><i data-p="hold"></i><i data-p="price"></i><i data-p="spend"></i><i data-p="ask"></i><span id="pn">0 of 5</span></div>
-
-<!-- ACQUIRE -->
-<section class="panel" id="p-acquire"><div class="top">
-  <svg class="mini" viewBox="0 0 200 150"><g fill="var(--ink3)" opacity=".55"><circle cx="30" cy="40" r="4"/><circle cx="52" cy="92" r="4"/><circle cx="70" cy="30" r="4"/><circle cx="88" cy="110" r="4"/><circle cx="104" cy="58" r="4"/><circle cx="118" cy="96" r="4"/><circle cx="60" cy="64" r="4"/><circle cx="136" cy="44" r="4"/></g><path class="d" d="M20 75 H160" stroke="var(--accent)" stroke-width="1.5" fill="none"/><circle cx="160" cy="75" r="6" fill="var(--accent)"/><text x="100" y="140" text-anchor="middle">many noisy guesses → one answer</text></svg>
-  <div><h2>Acquire</h2><p class="idea">Many cheap, noisy sources can be worth more than one expensive one, because their mistakes cancel.</p>
-  <div class="math">error of the average of n independent guesses ∝ 1 / √n<small>Condorcet, 1785: a crowd of slightly-better-than-chance voters is right more often than any member.</small></div>
-  <p>The catch is independence. Agents that copy each other, or were trained the same way, are one source wearing many hats. So the real question is how to buy <em>diverse</em> opinions cheaply, and how to tell when you have.</p></div></div>
+<section class="research section" id="research" aria-labelledby="research-title">
+  <div class="section-head"><div><p class="eyebrow">01 / RESEARCH</p><h2 id="research-title">The questions, and the work.</h2></div><p>From theory to experiments.<br> Open a paper for the idea behind it.</p></div>
+  <div class="filters" role="group" aria-label="Filter research by direction"><button data-filter="all" aria-pressed="true">All work <span>14</span></button><button data-filter="spend" aria-pressed="false">Spend</button><button data-filter="acquire" aria-pressed="false">Acquire</button><button data-filter="hold" aria-pressed="false">Hold</button><button data-filter="price" aria-pressed="false">Price</button><button data-filter="ask" aria-pressed="false">Ask</button><button data-filter="other" aria-pressed="false">Other work</button></div>
+  <p class="sr-only" id="filter-status" role="status">Showing all 14 research entries.</p>
   <div class="papers">
-    <div class="paper"><button><div class="pt">Wisdom of the machines: collective intelligence in LLM crowds</div><div class="pv">AAMAS 2026 · with Talebirad and others<i>method</i></div><div class="pg">When is a crowd of small models worth more than one big one?</div></button><div class="more hide"><a href="https://openreview.net/forum?id=fxqroxvUhk">Read it on OpenReview</a>.</div></div>
-    <div class="paper"><button><div class="pt">LoopBench: emergent symmetry-breaking strategies in LLM swarms</div><div class="pv">arXiv 2025 · first author<i>method</i></div><div class="pg">What a swarm can work out that no single agent holds.</div></button><div class="more hide"><a href="https://arxiv.org/abs/2512.13713">Read it on arXiv</a>.</div></div>
-  </div></section>
+<details class="paper flagship" data-leg="spend"><summary><span class="paper-number">01</span><span class="paper-main"><span class="flag">CURRENT FOCUS</span><span class="paper-title">Adaptive experiments for causal survival</span><span class="paper-gloss">Spending a trial budget where it buys the most causal certainty.</span></span><span class="paper-meta"><span class="status preparation">In preparation</span><span class="leg-label">spend</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">Current focus</p><p>Which patients should a study enrol, and which treatments should it assign, when outcomes may be censored? This is my current research focus: adaptive experimental design for causal survival questions.</p></div></details>
+<details class="paper" data-leg="spend"><summary><span class="paper-number">02</span><span class="paper-main"><span class="paper-title">Budget-constrained active learning to de-censor survival data</span><span class="paper-gloss">Which patients’ follow-up is worth paying for—and for how long?</span></span><span class="paper-meta"><span class="status">Under review</span><span class="leg-label">spend</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">MSc thesis · Jiang, Friggstad &amp; Greiner</p><p>A limited follow-up budget creates two linked choices: who to observe, and how long to observe them. The thesis connects batch selection to maximum coverage, yielding a (1 − 1/e) approximation guarantee for that formulation.</p><a class="paper-link" href="https://arxiv.org/abs/2510.12144">Read the preprint <span aria-hidden="true">↗</span></a></div></details>
+<details class="paper" data-leg="spend"><summary><span class="paper-number">03</span><span class="paper-main"><span class="paper-title">A data-driven evaluation of optimization techniques in cell culture media</span><span class="paper-gloss">Which strategy buys the most improvement per wet-lab experiment?</span></span><span class="paper-meta"><span class="status">Bioinformatics · 2026</span><span class="leg-label">spend</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">New Harvest · Texas A&amp;M</p><p>A comparison of optimization strategies for cell culture media. Bayesian optimization performed best in this evaluation, connecting information-efficient experimentation to a real wet-lab problem.</p></div></details>
+<details class="paper" data-leg="spend"><summary><span class="paper-number">04</span><span class="paper-main"><span class="paper-title">Spending compute where errors propagate</span><span class="paper-gloss">Splitting a compute budget across dependent decisions.</span></span><span class="paper-meta"><span class="status">Under review</span><span class="leg-label">spend</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">With Yashar Talebirad</p><p>When one decision feeds into another, where an error occurs matters. This work studies how to allocate computation across decisions that depend on each other.</p></div></details>
+<details class="paper" data-leg="acquire"><summary><span class="paper-number">05</span><span class="paper-main"><span class="paper-title">Wisdom of the machines: collective intelligence in LLM crowds</span><span class="paper-gloss">When many small, noisy agents can outperform one bigger model.</span></span><span class="paper-meta"><span class="status">AAMAS · 2026</span><span class="leg-label">acquire</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">With Talebirad and collaborators</p><p>Large language model (LLM) crowds offer a way to acquire information from multiple noisy sources. This work studies collective intelligence through the connection to Condorcet: aggregation can help when the members’ errors do not simply repeat each other.</p><a class="paper-link" href="https://openreview.net/forum?id=fxqroxvUhk">Read the paper <span aria-hidden="true">↗</span></a></div></details>
+<details class="paper" data-leg="acquire"><summary><span class="paper-number">06</span><span class="paper-main"><span class="paper-title">LoopBench: emergent symmetry-breaking strategies in LLM swarms</span><span class="paper-gloss">What a swarm works out that no single agent holds.</span></span><span class="paper-meta"><span class="status">Preprint</span><span class="leg-label">acquire</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">First author</p><p>A study of emergent symmetry-breaking strategies in swarms of large language models. It asks how collective behavior develops across agents, beyond the behavior of an individual model.</p><a class="paper-link" href="https://arxiv.org/abs/2512.13713">Read the preprint <span aria-hidden="true">↗</span></a></div></details>
+<details class="paper" data-leg="hold"><summary><span class="paper-number">07</span><span class="paper-main"><span class="paper-title">Toward a theory of hierarchical memory for language agents</span><span class="paper-gloss">How much detail is worth keeping as information ages?</span></span><span class="paper-meta"><span class="status">MemAgents · ICLR 2026</span><span class="leg-label">hold</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">Workshop paper</p><p>Memory is a resource allocation problem too. This work develops a theoretical view of hierarchical memory for language agents, organized around the value of retaining different levels of detail.</p></div></details>
+<details class="paper" data-leg="hold"><summary><span class="paper-number">08</span><span class="paper-main"><span class="paper-title">How memory architecture drives language emergence in LLM agents</span><span class="paper-gloss">The relationship between agent memory and language emergence.</span></span><span class="paper-meta"><span class="status">ALIFE · 2026</span><span class="leg-label">hold</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">Contributing author</p><p>A collaborative study of how memory architecture shapes language emergence in agents. Its placement under “Hold” is a tentative connection to the broader information-value framing.</p></div></details>
+<details class="paper" data-leg="price"><summary><span class="paper-number">09</span><span class="paper-main"><span class="paper-title">Generalization versus memorization</span><span class="paper-gloss">What a dataset is worth: transferable knowledge per example.</span></span><span class="paper-meta"><span class="status preparation">In preparation</span><span class="leg-label">price</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">First author</p><p>How much of what a model learns transfers beyond the examples it saw? This work uses the distinction between generalization and memorization to think about the value of training data.</p></div></details>
+<details class="paper" data-leg="ask"><summary><span class="paper-number">10</span><span class="paper-main"><span class="paper-title">When to ask the oracle; two-agent collaboration</span><span class="paper-gloss">When a hint or a partner is worth its cost.</span></span><span class="paper-meta"><span class="status preparation">Future directions</span><span class="leg-label">ask</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">Research questions</p><p>Two related directions: deciding when to ask for a hint, and deciding how collaborators divide work. Comparative advantage and the decay of unused skills complicate the immediate benefit of deferring to a stronger partner. These are future research directions, not completed results.</p></div></details>
+<details class="paper" data-leg="other"><summary><span class="paper-number">11</span><span class="paper-main"><span class="paper-title">Pediatric Crohn’s first bowel resection model</span><span class="paper-gloss">Survival modeling on messy clinical data.</span></span><span class="paper-meta"><span class="status">J. Pediatric Surgery · 2026</span><span class="leg-label">Application / origins</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">Clinical application · 1 of 22 authors</p><p>A collaborative clinical application predicting first bowel resection in pediatric Crohn’s disease. My contribution is part of a 22-author study.</p></div></details>
+<details class="paper" data-leg="other"><summary><span class="paper-number">12</span><span class="paper-main"><span class="paper-title">Severe adverse events after radiation therapy</span><span class="paper-gloss">Modeling adverse events using SEER data.</span></span><span class="paper-meta"><span class="status">ASTRO · 2026</span><span class="leg-label">Application / origins</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">Clinical application · Abstract</p><p>An abstract on severe adverse events after radiation therapy using Surveillance, Epidemiology, and End Results (SEER) data.</p></div></details>
+<details class="paper" data-leg="other"><summary><span class="paper-number">13</span><span class="paper-main"><span class="paper-title">Synchronous vs asynchronous RL on a real robot</span><span class="paper-gloss">Reinforcement learning beyond simulation.</span></span><span class="paper-meta"><span class="status">RISE · 2025</span><span class="leg-label">Application / origins</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">Side project</p><p>A real-robot comparison of synchronous and asynchronous reinforcement learning (RL).</p><a class="paper-link" href="https://arxiv.org/abs/2503.14554">Read the preprint <span aria-hidden="true">↗</span></a></div></details>
+<details class="paper" data-leg="other"><summary><span class="paper-number">14</span><span class="paper-main"><span class="paper-title">Herbal treatments and Alzheimer’s</span><span class="paper-gloss">Pooling scattered evidence: an early research direction.</span></span><span class="paper-meta"><span class="status">Biology · 2023</span><span class="leg-label">Application / origins</span></span><span class="expand" aria-hidden="true">+</span></summary><div class="paper-body"><p class="paper-credit">Review · With Maryam Vasefi</p><p>A review of herbal treatments and Alzheimer’s disease, from my research before machine learning.</p><a class="paper-link" href="https://www.mdpi.com/2079-7737/12/11/1453">Read the review <span aria-hidden="true">↗</span></a></div></details>
+  </div>
+  <div class="research-end"><span>Publication details and citation history</span><a href="https://scholar.google.com/citations?user=w8uQCukAAAAJ">Find me on Google Scholar <span aria-hidden="true">↗</span></a></div>
+</section>
 
-<!-- HOLD -->
-<section class="panel" id="p-hold"><div class="top">
-  <svg class="mini" viewBox="0 0 200 150"><path class="d" d="M20 30 C 60 32, 90 60, 180 118" stroke="var(--accent)" stroke-width="1.6" fill="none"/><g stroke="var(--ink3)" stroke-width="1"><path d="M20 120 H180"/><path d="M20 20 V120"/></g><text x="100" y="140" text-anchor="middle">age of a memory →</text><text x="28" y="26">precision kept</text></svg>
-  <div><h2>Hold</h2><p class="idea">Keeping information has a price too. How much detail is worth keeping, as it ages?</p>
-  <div class="math">precision(t) should fall with age t, so old memories become summaries and recent ones stay sharp<small>A memory is a bet that the detail will be worth more later than the space it takes now.</small></div>
-  <p>For an agent with limited memory, this is a hierarchy: exact recent events, compressed older ones, and the rules extracted from both. What an agent keeps also shapes what it can say.</p></div></div>
-  <div class="papers">
-    <div class="paper"><button><div class="pt">Toward a theory of hierarchical memory for language agents</div><div class="pv">ICLR 2026 MemAgents workshop · with Talebirad and others<i>theory</i></div><div class="pg">Memory whose precision decays with age.</div></button><div class="more hide"></div></div>
-    <div class="paper"><button><div class="pt">How memory architecture drives language emergence in LLM agents</div><div class="pv">ALIFE 2026 · with Talebirad, Redman, Zaïane<i>method</i></div><div class="pg">What agents remember shapes the language they invent together.</div></button><div class="more hide"></div></div>
-  </div></section>
+<section class="writing section" id="writing" aria-labelledby="writing-title">
+  <div><p class="eyebrow">02 / WRITING</p><h2 id="writing-title">Working through an idea.</h2><p class="muted">Notes on learning, experiments,<br>and choosing what to observe.</p></div>
+  <a class="essay" href="blogpost1.html"><span class="eyebrow">RESEARCH NOTE</span><h3>Active learning vs<br>Bayesian optimization <span aria-hidden="true">↗</span></h3><p>Two ways of deciding what to measure next.<br>What changes when the goal changes?</p><span class="read-link">Read the essay <span aria-hidden="true">→</span></span></a>
+</section>
 
-<!-- PRICE -->
-<section class="panel" id="p-price"><div class="top">
-  <svg class="mini" viewBox="0 0 200 150"><path class="d" d="M20 118 C 50 60, 90 42, 180 36" stroke="var(--accent)" stroke-width="1.6" fill="none"/><path d="M20 118 L180 118" stroke="var(--ink3)" stroke-dasharray="3 4" stroke-width="1" fill="none"/><g stroke="var(--ink3)" stroke-width="1"><path d="M20 120 H180"/><path d="M20 20 V120"/></g><text x="100" y="140" text-anchor="middle">examples →</text><text x="28" y="26">what the model can do</text><text x="130" y="112">memorising</text></svg>
-  <div><h2>Price</h2><p class="idea">A dataset is worth what it teaches, not how big it is.</p>
-  <div class="math">worth of an example = the improvement it buys on <em>new</em> cases, not on itself<small>Memorising a list and learning a rule look the same on the training data. They part ways on the next example.</small></div>
-  <p>So the price of information depends on who is learning. The same thousand rows are nearly free to a model that already knows the rule and priceless to one that does not.</p></div></div>
-  <div class="papers">
-    <div class="paper"><button><div class="pt">Generalization versus memorization</div><div class="pv">in preparation · first author<i>theory</i></div><div class="pg">Measuring transferable knowledge per example: when a network learns a rule rather than a list.</div></button><div class="more hide"></div></div>
-  </div></section>
-
-<!-- SPEND -->
-<section class="panel" id="p-spend"><div class="top">
-  <svg class="mini" viewBox="0 0 200 150"><g stroke="var(--ink3)" stroke-width="1"><path d="M20 120 H180"/></g><g class="d" stroke="var(--accent)" fill="var(--accent)" fill-opacity=".25" stroke-width="1.3"><rect x="30" y="60" width="22" height="60"/><rect x="62" y="84" width="22" height="36"/><rect x="94" y="40" width="22" height="80"/><rect x="126" y="100" width="22" height="20"/></g><g fill="var(--ink3)" opacity=".5"><rect x="158" y="110" width="22" height="10"/></g><text x="100" y="140" text-anchor="middle">a budget, split where it buys most</text></svg>
-  <div><h2>Spend<span class="flagtag">flagship</span></h2><p class="idea">With a fixed budget, which observations and experiments buy the most certainty?</p>
-  <div class="math">choose the set S with  Σ cost(i) ≤ B  that maximises  information(S)<small>Hard in general. For the right objective, greedy "most information per dollar" is provably within (1 − 1/e) of the best possible.</small></div>
-  <p>In medicine many outcomes are <em>censored</em>: we only know the event has not happened yet. That changes the price of everything, because an experiment is only worth paying for if you will live to see its answer.</p></div></div>
-  <div class="papers">
-    <div class="paper"><button><div class="pt">Adaptive experiments for causal survival</div><div class="pv">in preparation<i>theory</i><i>method</i></div><div class="pg">Which patients to enrol and which treatments to assign when many outcomes are censored.</div></button><div class="more hide">The value of an experiment depends on how likely its outcome is to be observed, relative to its cost. So the experiments worth running under censoring are not the ones an uncensored analysis would choose.</div></div>
-    <div class="paper"><button><div class="pt">Budget-constrained active learning to de-censor survival data</div><div class="pv">arXiv 2025 · with Jiang, Friggstad, Greiner<i>theory</i><i>method</i></div><div class="pg">Which patients' follow-up is worth paying for, and for how long.</div></button><div class="more hide">My master's thesis. It ranks patient–duration choices by expected information per unit of expected cost, with a (1−1/e) guarantee for the batch, by connecting batch active learning to the maximum-coverage problem. <a href="https://arxiv.org/abs/2510.12144">Read it on arXiv</a>.</div></div>
-    <div class="paper"><button><div class="pt">A data-driven evaluation of optimization techniques in cell culture media</div><div class="pv">Bioinformatics 2026 · with New Harvest and Texas A&amp;M<i>application</i></div><div class="pg">Which strategy buys the most improvement per experiment, on a real wet-lab task.</div></button><div class="more hide">Cellular agriculture has very little data and each experiment takes weeks. Bayesian optimization won.</div></div>
-    <div class="paper"><button><div class="pt">Spending compute where errors propagate</div><div class="pv">under review · with Talebirad<i>method</i></div><div class="pg">How to split a compute budget across decisions that depend on each other.</div></button><div class="more hide">Uniform allocation plus a logarithmic bonus for large subtrees; 1.22× and 1.18× better execution accuracy.</div></div>
-  </div></section>
-
-<!-- ASK -->
-<section class="panel" id="p-ask"><div class="top">
-  <svg class="mini" viewBox="0 0 200 150"><circle cx="50" cy="75" r="16" fill="none" stroke="var(--ink3)" stroke-width="1.4"/><circle cx="150" cy="75" r="26" fill="none" stroke="var(--accent)" stroke-width="1.6"/><path class="d" d="M68 75 H120" stroke="var(--accent)" stroke-width="1.5" fill="none" stroke-dasharray="4 4"/><text x="50" y="112" text-anchor="middle">learner</text><text x="150" y="118" text-anchor="middle">oracle</text><text x="94" y="66" text-anchor="middle">?  costs</text><text x="100" y="140" text-anchor="middle">explore alone, or pay for a hint?</text></svg>
-  <div><h2>Ask</h2><p class="idea">When an expert is always available, when should a learner ask, and when should it struggle on its own?</p>
-  <div class="math">ask when  E[gain from the answer]  >  cost of asking + what you stop learning by not trying<small>The second term is the one people forget. Deferring is not free: unused skills decay.</small></div>
-  <p>This is the newest station and the one I am moving toward. It is also the question every person now has with the models on their desk.</p></div></div>
-  <div class="papers">
-    <div class="paper"><button><div class="pt">When to ask the oracle</div><div class="pv">future direction<i>theory</i></div><div class="pg">Hints of increasing strength, the bias of not being able to un-see a proof, time-to-learn as an outcome.</div></button><div class="more hide"></div></div>
-    <div class="paper"><button><div class="pt">Two agents learning to divide the work</div><div class="pv">future direction<i>theory</i></div><div class="pg">When should the stronger partner still delegate? Comparative advantage, for humans and AI.</div></button><div class="more hide">Two agents who only know each other through conversation. Even when one is better at everything, both gain by specializing in what each is relatively best at, and deferring too much has a cost, because skills you stop using decay.</div></div>
-  </div></section>
-
-<!-- earned by walking the loop -->
-<div class="unlock" id="unlock">You've seen <span id="un">0</span> of the five stations. The rest of the story opens when you've walked the loop. <button id="skip">In a hurry? Open it now.</button></div>
-<div id="rest">
-  <h3>How I got here</h3>
-  <ol class="path">
-    <li><div class="y">2017–2021</div><div class="w">Biology, with mathematics on the side</div><div class="d">BSc in biological sciences at the University of Calgary, minors in computer science and data science. Biology taught me the real problem is never too much data.</div></li>
-    <li><div class="y">2020–2022</div><div class="w">First research: cryptography and Alzheimer's</div><div class="d">Private information retrieval with Ryan Henry; a review of herbal treatments for Alzheimer's with Maryam Vasefi (<a href="https://www.mdpi.com/2079-7737/12/11/1453">Biology, 2023</a>).</div></li>
-    <li><div class="y">2023–2025</div><div class="w">MSc in computing science, University of Alberta</div><div class="d">With Russell Greiner and Bei Jiang: active learning for censored survival data. Also reinforcement learning on a real robot (<a href="https://arxiv.org/abs/2503.14554">RISE 2025</a>) and a national pediatric Crohn's model (Journal of Pediatric Surgery, 2026).</div></li>
-    <li><div class="y">2024–2026</div><div class="w">Research engineer, Amii</div><div class="d">Bayesian optimization for cell-culture media; predicting severe adverse events after radiation therapy (ASTRO 2026); teaching ML for genetic data.</div></li>
-    <li><div class="y">2026–</div><div class="w">MD Anderson Cancer Center</div><div class="d">Cancer genomics and survival in Wenyi Wang's group.</div></li>
-  </ol>
-  <h3>Theory and practice</h3>
-  <p class="loop">I work on both the theory and the deployment, because each one keeps the other honest.</p>
-  <p class="small">Theory says what information is worth; applications are where it gets spent; and the applications send back the problems that need new theory.</p>
-  <h3>Writing</h3>
-  <p class="small"><a href="blogpost1.html">Active learning vs Bayesian optimization</a>: two ways of deciding what to measure next, side by side.<br>Coming next: a short survey of causal bandits, and the open problem of causal bandits with censored outcomes.</p>
-  <h3>Teaching</h3>
-  <p class="small">Four years teaching programming and computational thinking to children aged 8 to 14, using chess, at the Calgary Chess School. Curriculum modules on high-dimensional data for a public course on machine learning for genetic data (Amii).</p>
-</div>
-<footer><span>Ali Parsaee · Houston</span><span>Depth here is earned, not given. That is the point.</span></footer>
+<section class="about section" id="about" aria-labelledby="about-title">
+  <div class="about-intro"><p class="eyebrow">03 / BACKGROUND</p><h2 id="about-title">Theory meets<br>the real experiment.</h2><p class="about-statement">“I work on both the theory and the deployment, because each one keeps the other honest.”</p><p>I came to machine learning through biology. Today, I work on cancer genomics and survival in Wenyi Wang’s group at MD Anderson Cancer Center.</p><a href="mailto:aparsaee99@gmail.com">aparsaee99@gmail.com <span aria-hidden="true">↗</span></a></div>
+  <div class="background">
+    <div class="timeline-row"><span class="year">2026 —</span><div><h3>MD Anderson Cancer Center</h3><p>Machine learning researcher<br>Wenyi Wang’s group · Houston</p></div></div>
+    <div class="timeline-row"><span class="year">2024–26</span><div><h3>Alberta Machine Intelligence Institute</h3><p>Machine learning research engineer</p></div></div>
+    <div class="timeline-row"><span class="year">2025</span><div><h3>MSc, Computing Science</h3><p>University of Alberta<br>With Russell Greiner and Bei Jiang</p></div></div>
+    <div class="timeline-row"><span class="year">2021</span><div><h3>BSc, Biological Sciences</h3><p>University of Calgary<br>Minors in computer science and data science</p></div></div>
+    <details class="background-detail"><summary>Teaching & early research <span aria-hidden="true">+</span></summary><p>I taught machine learning for genetic data at Amii, and spent four years teaching programming to children aged 8–14 through chess at Calgary Chess School.</p><p>My undergraduate research included private information retrieval with Ryan Henry and an Alzheimer’s review with Maryam Vasefi.</p></details>
+  </div>
+</section>
 </main>
-<script>
-const ORDER = ['acquire', 'hold', 'price', 'spend', 'ask'];
-const seen = new Set(); let saved = []; try { saved = JSON.parse(localStorage.getItem('seen') || '[]'); } catch (e) {}
-saved.forEach(s => seen.add(s));
-const flows = {acquire: 'f1', hold: 'f2', price: 'f3', spend: 'f4', ask: 'f5'};
-function openStation(s, scroll) {
-  document.querySelectorAll('.st').forEach(g => g.classList.toggle('on', g.dataset.s === s));
-  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('on', p.id === 'p-' + s));
-  seen.add(s); try { localStorage.setItem('seen', JSON.stringify([...seen])); } catch (e) {}
-  paint();
-  if (scroll) { const p = document.getElementById('p-' + s); setTimeout(() => p.scrollIntoView({behavior: 'smooth', block: 'nearest'}), 60); }
-}
-function paint() {
-  document.querySelectorAll('.st').forEach(g => g.classList.toggle('seen', seen.has(g.dataset.s)));
-  document.querySelectorAll('#prog i').forEach(i => i.classList.toggle('seen', seen.has(i.dataset.p)));
-  ORDER.forEach(s => { const f = document.getElementById(flows[s]); if (!f) return; f.classList.toggle('lit', seen.has(s)); f.setAttribute('marker-end', seen.has(s) ? 'url(#ahl)' : 'url(#ah)'); });
-  const n = seen.size; document.getElementById('pn').textContent = n + ' of 5'; document.getElementById('un').textContent = n;
-  const all = ORDER.every(s => seen.has(s));
-  document.getElementById('rest').classList.toggle('on', all);
-  document.getElementById('unlock').style.display = all ? 'none' : '';
-}
-document.querySelectorAll('.st').forEach(g => { g.addEventListener('click', () => openStation(g.dataset.s, true)); g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button'); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openStation(g.dataset.s, true); } }); });
-document.querySelectorAll('.paper>button').forEach(b => b.addEventListener('click', () => { const m = b.nextElementSibling; if (m && m.textContent.trim()) m.classList.toggle('hide'); }));
-document.getElementById('skip').addEventListener('click', () => { ORDER.forEach(s => seen.add(s)); paint(); document.getElementById('rest').scrollIntoView({behavior: 'smooth'}); });
-if (new URLSearchParams(location.search).get('open')) openStation(new URLSearchParams(location.search).get('open'));
-paint();
-</script>
+<footer><a class="identity" href="#">Ali Parsaee <span aria-hidden="true">↑</span></a><span>Machine learning · Houston</span><a href="mailto:aparsaee99@gmail.com">Let’s talk research <span aria-hidden="true">↗</span></a></footer>
+</div>
 </body>
 </html>
