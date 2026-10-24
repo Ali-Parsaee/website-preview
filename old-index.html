@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ali Parsaee - Machine Learning Researcher</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #2563eb;
+      --secondary-color: #1e40af;
+      --accent-color: #3b82f6;
+      --text-color: #333;
+      --light-text: #666;
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --border-radius: 8px;
+      --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--secondary-color);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: var(--card-bg);
+      box-shadow: var(--box-shadow);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      font-weight: 500;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--primary-color);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+      padding-top: 80px;
+    }
+
+    /* here */
+    .hero .container {
+      width: 100%;
+      padding-left: 40px;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 100%;
+    }
+
+    .hero-container {
+      display: flex;
+      align-items: center;
+      gap: 80px;
+      justify-content: flex-start;
+    }
+
+    .profile-image {
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid white;
+      box-shadow: var(--box-shadow);
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .profile-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      color: var(--light-text);
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .social-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      color: white;
+      transition: var(--transition);
+    }
+
+    .social-links a:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-3px);
+    }
+
+    /* Section Styles */
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 40px;
+      text-align: center;
+      color: var(--primary-color);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 3px;
+      background-color: var(--accent-color);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* About Section */
+    .about-content {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about-text {
+      flex: 1;
+    }
+
+    /* Experience Section */
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 3px;
+      background-color: var(--accent-color);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -1.5px;
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 50px;
+      width: 45%;
+    }
+
+    .timeline-item:nth-child(odd) {
+      left: 0;
+    }
+
+    .timeline-item:nth-child(even) {
+      left: 55%;
+    }
+
+    .timeline-content {
+      padding: 20px;
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+    }
+
+    .timeline-date {
+      font-weight: bold;
+      color: var(--primary-color);
+      margin-bottom: 10px;
+    }
+
+    /* Papers and Projects Sections */
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+
+    .card-text {
+      color: var(--light-text);
+      margin-bottom: 15px;
+    }
+
+    .card-link {
+      display: inline-block;
+      padding: 8px 15px;
+      background-color: var(--primary-color);
+      color: white;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+
+    .card-link:hover {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+
+    /* Blog Section */
+    .blog-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .blog-item {
+      display: flex;
+      gap: 20px;
+      background-color: var(--card-bg);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      padding: 20px;
+      transition: var(--transition);
+    }
+
+    .blog-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .blog-content {
+      flex: 1;
+    }
+
+    .blog-title {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+    }
+
+    .blog-date {
+      font-size: 0.9rem;
+      color: var(--light-text);
+      margin-bottom: 10px;
+    }
+
+    /* Contact Section */
+    .contact-container {
+      display: flex;
+      justify-content: center;
+      gap: 50px;
+    }
+
+    .contact-info {
+      max-width: 400px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 15px;
+    }
+
+    .contact-icon {
+      width: 40px;
+      height: 40px;
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--card-bg);
+      padding: 40px 0;
+      text-align: center;
+      box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .footer-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .hero .container {
+        padding-left: 20px;
+      }
+
+      .hero-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .profile-image {
+        width: 280px;
+        height: 280px;
+        margin: 0 auto 20px;
+      }
+
+      .about-content {
+        flex-direction: column;
+      }
+
+      .timeline::after {
+        left: 31px;
+      }
+
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+      }
+
+      .timeline-item:nth-child(even) {
+        left: 0;
+      }
+
+      .contact-container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="navbar">
+        <div class="logo">Ali Parsaee</div>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#papers">Papers</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-container">
+          <div class="profile-image">
+            <img src="Pics/Ali_Ferris_Wheel.jpg" alt="Ali Parsaee" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+          </div>
+          <div>
+            <h1 class="hero-title">Ali Parsaee</h1>
+            <h2 class="hero-subtitle">Machine Learning Researcher</h2>
+            <p class="hero-description">
+              I am a research who loves to work on new and challenging problems in the world of Machine learning, Math, or Health AI. 
+              I often enjoy challenges that come from learning in settings where data is limited or very noisy, investigativng causal relations using ML techniques, or in optimizing gathering new data via active learning or bayesian optimisation methods. I also love researching LLM agents and swarms.
+            </p>
+            <div class="social-links">
+              <a href="mailto:aparsaee99@gmail.com"><i class="fas fa-envelope"></i></a>
+              <a href="https://www.linkedin.com/in/ali-parsaee/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://github.com/yoguy12345" target="_blank"><i class="fab fa-github"></i></a>
+              <!-- <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+              <a href="https://scholar.google.com/" target="_blank"><i class="fas fa-graduation-cap"></i></a> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>
+            I am a Machine Learning Researcher with expertise in developing innovative AI solutions. 
+            I obtained my bachelors in Biological sciences at the University of Calgary in 2021 and my masters in Computing Sciences at the University of Alberta in 2025 specializing in Statistical Machine Learning.
+            My thesis work regards finding near optimal way to gather and use data in hard settings (with limnited information) using Active Learning, Optimisation, and Survival analysis.
+          </p>
+          <p>
+            More recently I have been working in areas of transfer learning, as well as using LLM agents in efficient ways.
+            I enjoy collaborating with diverse teams and continuously learning new techniques and frameworks.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Experience Section -->
+<section id="experience">
+  <div class="container">
+    <h2 class="section-title">Work Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-date">Nov 2024 - Present</div>
+          <h3>Machine Learning Resident</h3>
+          <p>Alberta Machine Intelligence Institute (AMII)</p>
+          <p>
+            Researched Bayesian optimization and transfer learning techniques for life sciences applications.
+            Designed models to improve media formulation for cell growth across multiple cell types.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-date">Apr 2024 - Sept 2024</div>
+          <h3>Data Science Consultant (WILO)</h3>
+          <p>Alberta Machine Intelligence Institute (AMII)</p>
+          <p>
+            Developed scalable ML pipelines using SQL and Python. Delivered prototype ML applications and actionable insights to industry partners.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-date">Apr 2024 - Sept 2024</div>
+          <h3>Educator on working with Genetic data</h3>
+          <p>Alberta Machine Intelligence Institute (AMII)</p>
+          <p>
+            Work Integrated Learning Oppportunity (WILO) where I researched and helped compose a Coursera course teaching ML scientist effective dimension reduction techinques for using Genentic datasets.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-date">Apr 2023 - Nov 2024</div>
+          <h3>Graduate Research Assistant</h3>
+          <p>University of Alberta</p>
+          <p>
+            Built statistical models and time series analyses to predict disease diagnosis timelines. Developed optimal algorithm for data gathering in survival settings under budget constraints.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-date">Apr 2023 - Dec 2023</div>
+          <h3>Machine Learning Intern</h3>
+          <p>University of Alberta</p>
+          <p>
+            Engineered data pipelines and developed classification models for alloy properties prediction, achieving 90% accuracy.
+          </p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <div class="timeline-date">Sept 2021 - Aug 2024</div>
+          <h3>Python and Data Analysis Instructor</h3>
+          <p>Calgary Chess School</p>
+          <p>
+            Designed and taught Python and data visualization curriculum. Created open-source educational materials for students and the broader community.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Papers Section -->
+<section id="papers">
+  <div class="container">
+    <h2 class="section-title">Research Work</h2>
+    <div class="cards-container">
+
+      <!-- <div class="card">
+        <div class="card-content">
+          <h3 class="card-title">Active Learning on Bayesian Models with a Budget Constraint</h3>
+          <p class="card-text">Submitted to NeurIPS</p>
+          <p>Proposes a novel data acquisition algorithm guaranteeing a 63% optimal convergence rate under budget constraints. Validated on medical and financial datasets.</p>
+        </div>
+      </div> -->
+
+      <div class="card">
+        <div class="card-content">
+          <h3 class="card-title">Synchronous vs Asynchronous RL in a Real World Robot</h3>
+          <p class="card-text">Presented at RISE Conference</p>
+          <p>Developed and compared synchronous vs asynchronous updates in soft actor-critic algorithms using the FRANKA robotic arm.</p>
+          <a href="https://arxiv.org/abs/2503.14554" class="card-link">Read Paper</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content">
+          <h3 class="card-title">Alzheimer's and its Relation to Herbal Medicine</h3>
+          <p class="card-text">Published in *Biology*, MDPI</p>
+          <p>Conducted a meta-analysis of Alzheimer's mechanisms and the role of herbal compounds in altering disease pathways.</p>
+          <a href="https://www.mdpi.com/2079-7737/12/11/1453" class="card-link" target="_blank">Read Paper</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content">
+          <h3 class="card-title">Wisdom of the Machines: Exploring Emergent Intelligence in LLM Crowds</h3>
+          <p class="card-text">Submitted to ACM</p>
+          <p>Investigates the emergence of intelligence through the aggregation of LLM agents like Qwen2 and LLaMA 3.2 using a new mathematical framework.</p>
+          <a href="https://openreview.net/forum?id=fxqroxvUhk" class="card-link">Read Paper</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content">
+          <h3 class="card-title">Crohn's Disease Survival Prediction</h3>
+          <p class="card-text">Submitted to Bioinformatics</p>
+          <p>Predicts time to first bowel resection in pediatric Crohn's patients using clinical and lab data. In collaboration with medical professionals.</p>
+          <a href="https://cidscann.ca/blog/f/ai-algorithm-helps-tailor-medical-treatments-after-pcd-diagnosis" class="card-link" target="_blank">View Report</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content">
+          <h3 class="card-title">Budget-constrained Active Learning to Effectively De-censor Survival Data</h3>
+          <p class="card-text">Submitted to ICML</p>
+          <p>Proposes a novel data acquisition algorithm guaranteeing a 63% optimal convergence rate under budget constraints. Validated on medical and financial datasets.</p>
+          <a href="https://arxiv.org/abs/2510.12144" class="card-link" target="_blank">Read Paper</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content">
+          <h3 class="card-title">LoopBench: Discovering Emergent Symmetry Breaking Strategies with LLM Swarms</h3>
+          <p class="card-text">Submitted to ANTS conference</p>
+          <p>Proposes a novel benchmark in evaluating how llm agents collaborate and deal with complexity via np hard problems.</p>
+          <a href="https://arxiv.org/abs/2512.13713" class="card-link" target="_blank">Read Paper</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- Projects Section -->
+<!-- Projects Section -->
+<section id="projects">
+  <div class="container">
+    <h2 class="section-title">Projects</h2>
+    <div class="cards-container">
+
+      <div class="card">
+        <div class="card-content">
+          <h3 class="card-title">BioHazardGPT</h3>
+          <p class="card-text">AI-powered safety classification tool for chemistry and biology labs. Offers real-time risk assessment (Safe, Caution, Hazardous) with contextual reasoning using both rule-based and GPT-4o RAG systems.</p>
+          <p>Technologies: GPT-4o, RAG, FAISS, ChromaDB, Streamlit, GitHub Pages, Python</p>
+          <a href="https://ali-parsaee.github.io/Biohazard_project/" class="card-link" target="_blank">Live Demo</a>
+          <a href="https://github.com/yoguy12345/Biohazard_project" class="card-link" target="_blank">View Code</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content">
+          <h3 class="card-title">Pocket AI Therapist</h3>
+          <p class="card-text">Runner-up at NatHacks Hackathon. Built a multi-modal AI model for real-time sentiment and emotion analysis using speech and facial cues.</p>
+          <p>Technologies: OpenCV, Hugging Face, Amazon Polly, Python</p>
+          <a href="https://github.com/yoguy12345/Moodmender" class="card-link" target="_blank">View Project</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-content">
+          <h3 class="card-title">Country Clustering</h3>
+          <p class="card-text">Used K-means clustering on Happiness Report data to visualize socio-economic trends among countries.</p>
+          <p>Technologies: Streamlit, Pandas, Scikit-learn, Python</p>
+          <a href="https://github.com/yoguy12345/Happy-World" class="card-link" target="_blank">View Project</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+
+  <!-- Blog Section
+  <section id="blog">
+    <div class="container">
+      <h2 class="section-title">Blog</h2>
+      <div class="blog-preview">
+        <div class="blog-item">
+          <div class="blog-content">
+            <h3 class="blog-title"><a href="blogpost1.html">Active Learning vs Bayesian Optimisation</a></h3>
+            <p class="blog-date">January 15, 2023</p>
+            <p>Exploring the key differences between active learning and Bayesian optimization methods, with practical examples and implementation details.</p>
+          </div>
+        </div>
+        <div class="blog-item">
+          <div class="blog-content">
+            <h3 class="blog-title"><a href="blog.html">Recent Advances in Transformer Models</a></h3>
+            <p class="blog-date">March 22, 2023</p>
+            <p>A comprehensive overview of the latest developments in transformer architectures and their applications in various domains.</p>
+          </div>
+        </div>
+        <div class="blog-item">
+          <div class="blog-content">
+            <h3 class="blog-title"><a href="blog.html">The Future of Reinforcement Learning</a></h3>
+            <p class="blog-date">June 10, 2023</p>
+            <p>Insights into the emerging trends and future directions of reinforcement learning research and applications.</p>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 30px;">
+        <a href="blog.html" class="card-link">View All Posts</a>
+      </div>
+    </div>
+  </section> -->
+
+ <!-- Contact Section -->
+<section id="contact">
+  <div class="container">
+    <h2 class="section-title">Contact Me</h2>
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div>
+            <h3>Email</h3>
+            <p><a href="mailto:aparsaee99@gmail.com">aparsaee99@gmail.com</a></p>
+          </div>
+        </div>
+        <!-- <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div>
+            <h3>Location</h3>
+            <p>Edmonton, AB, Canada</p>
+          </div>
+        </div> -->
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fab fa-linkedin-in"></i>
+          </div>
+          <div>
+            <h3>LinkedIn</h3>
+            <p><a href="https://www.linkedin.com/in/ali-parsaee/" target="_blank">linkedin.com/in/yourprofile</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <p>&copy; 2025 Ali Parsaee. All Rights Reserved.</p>
+      <div class="social-links">
+        <a href="mailto:aparsaee99@gmail.com"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/ali-parsaee/" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/yoguy12345" target="_blank"><i class="fab fa-github"></i></a>
+        <!-- <a href="https://twitter.com/" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://scholar.google.com/" target="_blank"><i class="fas fa-graduation-cap"></i></a> -->
+      </div>
+    </div>
+  </div>
+</footer>
+
