@@ -55,8 +55,10 @@ h2{font:500 13px var(--sans);letter-spacing:1.6px;text-transform:uppercase;color
 .leg.flag .t::after{content:"flagship";font:600 10.5px var(--sans);letter-spacing:1.2px;text-transform:uppercase;color:var(--accent2);margin-left:10px;vertical-align:3px}
 .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s ease}
 .open>.body{grid-template-rows:1fr}
-.body>div{overflow:hidden}
-.papers{padding:0 18px 12px 76px}
+.body>div{overflow:hidden;min-height:0}
+.papers{padding:0 18px 0 76px}
+.papers>.paper:last-child{padding-bottom:16px}
+.leg:not(.open) .papers{visibility:hidden}
 .paper{border-top:1px solid var(--line);padding:12px 0}
 .paper>button{all:unset;cursor:pointer;display:block;width:100%}
 .paper .pt{font:500 18px/1.35 var(--serif)}
