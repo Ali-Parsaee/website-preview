@@ -10,3 +10,62 @@
 .technical-note{border-top:1px solid var(--rule);padding:15px 0;margin:15px 0}.technical-note summary{cursor:pointer;display:flex;justify-content:space-between;list-style:none;font-size:12px}.technical-note summary span{color:var(--rust)}.technical-note p{margin-top:13px}.technical-note .equation{font:22px/1.5 var(--serif);color:var(--rust);padding:9px 0}.technical-note[open] summary span{transform:rotate(45deg)}
 @media(max-width:650px){.margin-note{top:7px}.technical-note .equation{font-size:19px}}
 .motion-paused *{animation:none!important;transition:none!important}
+
+/* v6 (2026-10-25, Claude): the story figure is five working models (labs.js). Dark "screen" with 3Blue1Brown-style
+   colours and hand-written notes; controls sit directly under the canvas they drive; each chapter has a "think first"
+   question and a collapsible "go deeper" section. */
+:root{--screen:#12171d;--screen-line:#26313b;--screen-ink:#ece7dc;--screen-muted:#9aa8b3;--key-a:#f4c95d;--key-b:#58c4dd}
+.world{background:var(--screen);color:var(--screen-ink)}
+.canvas-wrap{flex:none;height:clamp(380px,calc(100vh - 330px),600px);min-height:0}
+#world-canvas{cursor:crosshair}
+.scene-result{position:static;max-width:none;min-height:4.9em;margin:0;padding:12px 23px;font:14px/1.6 var(--serif);color:#ebe5d8;pointer-events:auto;border-top:1px solid var(--screen-line)}
+.lab-panel{padding:2px 23px 16px}
+.lab-controls{display:flex;flex-direction:column;gap:11px}
+.lab-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.lab-row.small{gap:2px 18px}
+.world .experiment{background:var(--screen-ink);border-color:var(--screen-ink);color:var(--screen);font-size:11.5px;padding:9px 14px;gap:14px}
+.world .experiment:hover{background:#fff}
+.world .experiment.secondary{background:transparent;color:var(--screen-ink);border-color:#56636e}
+.world .experiment.secondary:hover{background:#1f2a33;border-color:#8b98a3}
+.world .quiet{color:#b4c0c9;font-size:11px;padding:3px 0}
+.world .quiet:hover{color:#fff}
+.world button:focus-visible,.world input:focus-visible{outline:2px solid var(--key-a);outline-offset:2px}
+.slider{display:grid;grid-template-columns:minmax(118px,150px) minmax(0,1fr) 52px;align-items:center;gap:12px;font-size:11.5px;color:#d5dde2;max-width:560px}
+.slider input{width:100%;margin:0;accent-color:var(--key-a)}
+.slider output{font:11px var(--mono);color:var(--key-a);text-align:right}
+.segmented{display:inline-flex;border:1px solid #56636e}
+.segmented button{border:0;background:none;color:#d5dde2;padding:6px 10px;font-size:11px}
+.segmented button+button{border-left:1px solid #56636e}
+.segmented button[aria-pressed=true]{background:var(--screen-ink);color:var(--screen)}
+.lab-label{font-size:11.5px;color:var(--screen-muted)}
+.meter{display:grid;gap:6px;max-width:560px}
+.meter-track{display:block;height:4px;background:#2c3843;border-radius:2px;overflow:hidden}
+.meter-fill{display:block;height:100%;width:100%;background:#fc6255;transition:width .4s ease}
+.world figcaption{font-size:10.5px;color:#93a1ac;border-top-color:var(--screen-line);align-items:center}
+.legend{flex-wrap:wrap;gap:3px 5px;line-height:1.9}
+.legend i.lg{display:inline-block;vertical-align:middle;margin:0 1px 0 7px;width:8px;height:8px;border-radius:50%;background:currentColor;color:#d5dde2}
+.legend i.lg:first-child,.legend i.lg+i.lg{margin-left:0}
+.legend i.lg.ring{background:transparent;border:1.5px solid currentColor}
+.legend i.lg.line{width:15px;height:0;border-radius:0;background:none;border-top:2px solid currentColor}
+.legend i.lg.line.dim{border-top-style:dashed}
+.legend i.lg.bar{width:6px;height:11px;border-radius:1px}
+.legend i.lg.w{color:var(--screen-ink)}.legend i.lg.a{color:var(--key-a)}.legend i.lg.b{color:var(--key-b)}.legend i.lg.g{color:#83c167}.legend i.lg.r{color:#fc6255}.legend i.lg.dim{color:#80909b}
+.think{max-width:430px;margin-top:20px;font:italic 15.5px/1.55 var(--serif);color:var(--ink)}
+.think>span{display:block;font:normal 9px/1.6 var(--mono);letter-spacing:1.3px;text-transform:uppercase;color:var(--rust);margin-bottom:5px}
+mark.ka,mark.kb{color:inherit;padding:0 .12em;background:linear-gradient(transparent 56%,rgba(244,201,93,.75) 56%)}
+mark.kb{background:linear-gradient(transparent 56%,rgba(88,196,221,.55) 56%)}
+.deeper{max-width:430px;margin:22px 0;border-top:1px solid var(--rule);padding-top:11px}
+.deeper summary{cursor:pointer;font-size:12.5px;list-style:none;display:flex;gap:9px;align-items:baseline;color:var(--ink)}
+.deeper summary::-webkit-details-marker{display:none}
+.deeper summary:before{content:'+';font:15px/1 var(--mono);color:var(--rust);width:12px}
+.deeper[open] summary:before{content:'–'}
+.deeper summary:hover{color:var(--rust)}
+.deeper p{font-size:13.5px;line-height:1.75;color:#3a4047;margin-top:11px}
+.deeper i{font-family:var(--serif)}
+.deeper .formula{font:italic 16px/1.4 var(--serif);color:var(--ink);background:#e4dfd3;padding:9px 13px;overflow-x:auto;white-space:nowrap;border-left:2px solid var(--rust)}
+.chapter-tabs button.explored>span:after{content:'✓';margin-left:5px;color:var(--rust)}
+@media(min-width:901px) and (min-height:760px){.world{position:sticky;top:12px;align-self:start}}
+@media(max-width:900px){.canvas-wrap{height:440px}.lab-panel{padding:2px 17px 14px}.scene-result{padding:12px 17px;font-size:13.5px}.slider{grid-template-columns:minmax(100px,130px) minmax(0,1fr) 46px}}
+@media(max-width:650px){.canvas-wrap{height:470px;min-height:0}.world{min-height:0}.think{font-size:16px;max-width:550px}.deeper{max-width:550px}.deeper p{font-size:14px}.world .experiment{font-size:12px}.world .quiet{font-size:12px}.lab-label,.slider{font-size:12px}}
+@media print{.lab-panel,.scene-result{display:none!important}.deeper{display:block}}
+.lab-controls[hidden]{display:none}

@@ -3,157 +3,47 @@ document.documentElement.classList.add('js');
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
-let chapter = 0, paused = reducedMotion, revealCount = 0, budget = 6, longer = 0, elsewhere = 0, structured = false, shared = false, correlated = false, support = 'weak', lastObservation = 'wait';
-const sceneNames = ['A partial view of the possible','Time is part of the price','The same evidence, a different representation','Partial views, shared understanding','The evidence comes back to a decision'];
-const sceneNotes = ['many possible worlds<br>fit what we have seen','an unfinished observation<br>still tells us something','keep the distinctions<br>the task needs','different views can help;<br>repeated mistakes cannot','a decision needs evidence,<br>not just a prediction'];
-const canvas = $('#world-canvas'), ctx = canvas.getContext('2d');
-const W = 900, H = 700, N = 96;
-const palette = {white:'#d5e1e5',gold:'#e4b576',blue:'#83a9ca',gray:'#6f8596',faint:'#2b3f50'};
-const rand = n => {const v = Math.sin(n*127.13+31.7)*43758.5453;return v-Math.floor(v);};
-const lerp = (a,b,t) => a+(b-a)*t;
-const base = Array.from({length:N},(_,i)=>({r:rand(i+1),s:rand(i+301),t:rand(i+701),group:i%4}));
-function positions(){
- return base.map((p,i)=>{
-  let x,y;
-  if(chapter===0){
-   x=100+p.r*700;const t=(x-100)/700;
-   y=400-Math.sin(t*Math.PI)*(100+p.s*160)+Math.sin(t*9+p.s)*22;
-   if(revealCount){x=lerp(x,170+p.r*550,.12*revealCount);y+=p.group%2 ? revealCount*10:-revealCount*10;}
-  }else if(chapter===1){
-   const row=i%8, pos=Math.floor(i/8)/11;
-   x=105+pos*(245+longer*40+(row===elsewhere%8?elsewhere*12:0));y=160+row*42+(p.s-.5)*8;
-  }else if(chapter===2){
-   if(structured){const centers=[[265,215],[620,215],[265,395],[620,395]];x=centers[p.group][0]+Math.cos(p.r*Math.PI*2)*(25+p.s*62);y=centers[p.group][1]+Math.sin(p.r*Math.PI*2)*(25+p.s*62);}
-   else {x=110+p.r*680;y=145+p.s*330;}
-  }else if(chapter===3){
-   const centers=[[220,210],[680,210],[220,420],[680,420]], g=p.group;
-   const angle=correlated?(Math.floor(i/4)*.85):p.r*Math.PI*2;
-   let rad=25+(correlated?rand(Math.floor(i/4)+500):p.s)*55;
-   x=centers[g][0]+Math.cos(angle)*rad;y=centers[g][1]+Math.sin(angle)*rad;
-   if(shared&&i%3===0){x=450+(p.r-.5)*95;y=305+(p.s-.5)*95;}
-  }else {
-   const group=i%2;const mu=support==='clear'?(group?290:610):(group?510:390);
-   const sd=support==='clear'?60:105;
-   const z=(p.r+p.s+p.t-1.5)*1.8;
-   x=mu+z*sd;y=450-Math.exp(-z*z*.5)*205+(p.s-.5)*40;
-  }
-  return {x,y};
- });
-}
-let current=positions(), from=current.map(p=>({...p})), target=current.map(p=>({...p})), animationStart=0, frame=0, animationProgress=1;
-function resize(){const r=canvas.getBoundingClientRect();const d=Math.min(devicePixelRatio||1,2);canvas.width=Math.max(1,Math.round(r.width*d));canvas.height=Math.max(1,Math.round(r.height*d));draw(animationProgress);}
-function setStroke(color,width=1,alpha=1){ctx.strokeStyle=color;ctx.lineWidth=width;ctx.globalAlpha=alpha;ctx.setLineDash([]);}
-function path(points,color,width=1,alpha=1,dash=[]){setStroke(color,width,alpha);ctx.setLineDash(dash);ctx.beginPath();points(ctx);ctx.stroke();ctx.setLineDash([]);ctx.globalAlpha=1;}
-function circle(x,y,r,color,fill=true,alpha=1){ctx.globalAlpha=alpha;ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=color;ctx.strokeStyle=color;ctx.lineWidth=1;fill?ctx.fill():ctx.stroke();ctx.globalAlpha=1;}
-function text(x,y,t,color=palette.gray,size=11,align='left'){ctx.globalAlpha=1;ctx.fillStyle=color;ctx.font=`${size}px ui-monospace,monospace`;ctx.textAlign=align;ctx.fillText(t,x,y);}
-function curveBell(mu,sd,baseY,height,color,fill=false){
- ctx.beginPath();ctx.moveTo(70,baseY);for(let x=70;x<=830;x+=4){ctx.lineTo(x,baseY-height*Math.exp(-.5*((x-mu)/sd)**2));}
- if(fill){ctx.lineTo(830,baseY);ctx.closePath();ctx.fillStyle=color;ctx.globalAlpha=.07;ctx.fill();ctx.globalAlpha=1;}else{ctx.strokeStyle=color;ctx.lineWidth=1.5;ctx.stroke();}
-}
-function background(stage,opacity){
- ctx.save();ctx.globalAlpha=opacity;
- // Quiet reference lines locate observations and the two possible actions.
- path(c=>{c.moveTo(65,485);c.lineTo(835,485);},palette.gray,1,.18);
- [260,640].forEach((x,i)=>{circle(x,530,25,i?palette.blue:palette.gold,false,.5);circle(x,530,3,i?palette.blue:palette.gold,true,.9);});
- if(stage===0){
-  for(let k=0;k<30;k++){
-   const f=k/29;
-   path(c=>{for(let j=0;j<=90;j++){const t=j/90,x=100+t*700,y=400-Math.sin(t*Math.PI)*(100+f*160)+Math.sin(t*9+f)*22;(j?c.lineTo(x,y):c.moveTo(x,y));}},k<15?palette.blue:palette.gold,revealCount&&k>=15?1.3:.9,revealCount&&k<15?.045:.15+f*.25);
-  }
-  path(c=>{c.moveTo(260,505);c.bezierCurveTo(240,430,150,430,170,340);},palette.gold,1,.5,[4,6]);
-  path(c=>{c.moveTo(640,505);c.bezierCurveTo(680,430,780,420,745,355);},palette.blue,1,.5,[4,6]);
-  if(revealCount){const p=current[17];circle(p.x,p.y,18,palette.gold,false,.65);path(c=>{c.moveTo(p.x,p.y+20);c.bezierCurveTo(p.x-35,410,260,440,260,505);},palette.gold,2,.7);text(p.x+25,p.y-6,'new evidence',palette.gold,12);circle(260,530,34,palette.gold,false,.9);}
+let chapter = 0, paused = reducedMotion;
+const rand = n => { const v = Math.sin(n * 127.13 + 31.7) * 43758.5453; return v - Math.floor(v); }; // seeded jitter for the project drawings
 
- }else if(stage===1){
-  const cap=350+longer*40;
-  for(let row=0;row<8;row++){
-   const y=160+row*42, finish=390+rand(row+100)*330, end=Math.min(cap,finish);
-   path(c=>{c.moveTo(100,y);c.lineTo(end,y);},row===elsewhere%8?palette.gold:palette.blue,1.5,.65);
-   if(cap<finish){path(c=>{c.moveTo(end,y);c.lineTo(790,y);},palette.gray,1,.4,[3,8]);path(c=>{c.moveTo(end,y-6);c.lineTo(end,y+6);},palette.gold,2,.9);}else circle(end,y,5,palette.gold);
-   text(73,y+4,String(row+1).padStart(2,'0'),palette.gray,10);
+// The figure holds five small working models (labs.js), one per chapter. This part only switches between them.
+const labs = window.Labs ? window.Labs.mount($('#world-canvas'), {
+  say: t => { $('#scene-result').textContent = t; },
+  legend: h => { $('#lab-legend').innerHTML = h; },
+  title: t => { $('#scene-title').textContent = t; },
+  explored: i => { const tab = $$('[data-go]')[i]; if (tab && !tab.classList.contains('explored')) { tab.classList.add('explored'); tab.setAttribute('aria-label', tab.lastChild.textContent.trim() + ', explored'); } },
+  paused: () => paused
+}) : null;
+function goToChapter(index, focus = false) {
+  chapter = Math.max(0, Math.min(4, index));
+  $$('.chapter').forEach((el, i) => { el.classList.toggle('active', i === chapter); el.setAttribute('aria-hidden', String(i !== chapter)); });
+  $$('[data-go]').forEach((el, i) => el.setAttribute('aria-current', i === chapter ? 'step' : 'false'));
+  $$('.lab-controls').forEach(el => { el.hidden = +el.dataset.lab !== chapter; });
+  $('#previous').disabled = chapter === 0;
+  $('#next').innerHTML = chapter === 4 ? 'Back to the beginning <span>↺</span>' : 'Follow the question <span>→</span>';
+  if (labs) labs.show(chapter);
+  if (innerWidth <= 650) $('#story').scrollIntoView({behavior: paused ? 'instant' : 'smooth'});
+  if (focus) $('#chapter-title-' + chapter).focus({preventScroll: true});
+}
+$$('[data-go]').forEach(button => button.addEventListener('click', () => goToChapter(+button.dataset.go)));
+$('#previous').addEventListener('click', () => goToChapter(chapter - 1, true));
+$('#next').addEventListener('click', () => goToChapter(chapter === 4 ? 0 : chapter + 1, true));
+$('.chapter-tabs').addEventListener('keydown', event => { if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return; event.preventDefault(); const next = event.key === 'Home' ? 0 : event.key === 'End' ? 4 : (chapter + (event.key === 'ArrowRight' ? 1 : 4)) % 5; goToChapter(next); $$('[data-go]')[next].focus(); });
+function motionLabel() { document.documentElement.classList.toggle('motion-paused', paused); $('#motion').textContent = paused ? 'Enable transitions' : 'Pause transitions'; $('#motion').setAttribute('aria-pressed', String(paused)); }
+$('#motion').addEventListener('click', () => { paused = !paused; motionLabel(); if (labs) labs.redraw(); });
+motionLabel();
+if (labs) {
+  labs.show(0);
+  // The first model starts learning on its own once the figure is on screen, unless motion is reduced.
+  if (!paused && 'IntersectionObserver' in window) {
+    const watch = new IntersectionObserver(entries => {
+      if (!entries.some(e => e.isIntersecting)) return;
+      watch.disconnect();
+      setTimeout(() => { if (chapter === 0 && !paused) labs.autoplay(0); }, 1400);
+    }, {threshold: .45});
+    watch.observe($('.world'));
   }
-  path(c=>{c.moveTo(cap,125);c.lineTo(cap,475);},palette.gold,1,.6,[3,6]);text(cap,112,'observed so far',palette.gold,11,'center');text(790,475,'follow-up time →',palette.gray,10,'right');
-  path(c=>{c.moveTo(350,485);c.bezierCurveTo(350,520,300,500,260,505);},palette.gold,1,.4);
-  path(c=>{c.moveTo(600,485);c.lineTo(640,505);},palette.blue,1,.4);
- }else if(stage===2){
-  if(structured){
-   [[265,215],[620,215],[265,395],[620,395]].forEach(([x,y],i)=>{for(let r=75;r<=105;r+=10)circle(x,y,r,i%2?palette.blue:palette.gold,false,.1+(105-r)*.004);text(x+112,y+4,['feature α','feature β','feature γ','feature δ'][i],palette.gray,11,'left');path(c=>{c.moveTo(x,y+80);c.bezierCurveTo(x,485,x<450?260:640,475,x<450?260:640,505);},i%2?palette.blue:palette.gold,1,.3);});
-
-  }else{
-   for(let i=0;i<N;i+=5){const a=current[i],b=current[(i+13)%N];path(c=>{c.moveTo(a.x,a.y);c.lineTo(b.x,b.y);},palette.gray,.6,.18);}
-
-  }
- }else if(stage===3){
-  const centers=[[220,210],[680,210],[220,420],[680,420]];
-  centers.forEach(([x,y],i)=>{circle(x,y,100,palette.gray,false,.25);text(x-110,y+3,'agent '+(i+1),palette.gray,11,'right');if(shared){path(c=>{c.moveTo(x,y);c.quadraticCurveTo(x,305,450,305);},correlated?palette.gold:palette.blue,1.3,.6,[4,5]);}});
-  if(shared){circle(450,305,63,palette.gold,false,.5);path(c=>{c.moveTo(450,370);c.bezierCurveTo(450,450,260,445,260,505);},palette.gold,1.4,.5);path(c=>{c.moveTo(450,370);c.bezierCurveTo(450,450,640,445,640,505);},palette.blue,1.4,.5);text(450,410,correlated?'shared blind spot':'combined view',correlated?palette.gold:palette.white,11,'center');}
- }else{
-  const clear=support==='clear';
-  for(let k=0;k<12;k++){
-   const sd=(clear?62:105)+k*3.5, a=clear?610:390,b=clear?290:510;
-   ctx.globalAlpha=.12+k*.025;curveBell(a,sd,450,220-k*3,palette.gold);curveBell(b,sd,450,220-k*3,palette.blue);
-  }
-  ctx.globalAlpha=1;curveBell(clear?610:390,clear?62:105,450,220,palette.gold,true);curveBell(clear?290:510,clear?62:105,450,220,palette.blue,true);
-
-  text(815,472,'greater illustrative value →',palette.gray,10,'right');if(clear)circle(260,530,34,palette.gold,false,.8);
-  path(c=>{c.moveTo(700,545);c.bezierCurveTo(840,540,855,230,810,135);},palette.gray,1,.4,[3,7]);
- }
- ctx.restore();
 }
-function draw(t){
- animationProgress=t;
- if(!canvas.width||!ctx)return;
- const sx=canvas.width/W,sy=canvas.height/H;ctx.setTransform(sx,0,0,sy,0,0);ctx.clearRect(0,0,W,H);
- background(chapter,1);
- current=from.map((p,i)=>({x:lerp(p.x,target[i].x,t),y:lerp(p.y,target[i].y,t)}));
- current.forEach((p,i)=>{
-  const relevant=(chapter===0&&revealCount&&i%17===0)||(chapter===1&&i%8===elsewhere%8)||(chapter===2&&structured&&i%6===0)||(chapter===3&&shared&&i%3===0)||(chapter===4&&support==='clear'&&i%2===1);
-  const observed=i%4===0||relevant;
-  const color=relevant?palette.gold:observed?palette.white:palette.gray;
-  circle(p.x,p.y,relevant?3.4:observed?2.5:2,color,observed,observed?.95:.55);
- });
- ctx.setTransform(1,0,0,1,0,0);
-}
-function animate(){
- cancelAnimationFrame(frame);from=current.map(p=>({...p}));target=positions();animationStart=performance.now();
- if(paused){draw(1);return;}
- function tick(now){const progress=Math.min(1,(now-animationStart)/850);const t=1-Math.pow(1-progress,3);draw(t);if(progress<1)frame=requestAnimationFrame(tick);}
- frame=requestAnimationFrame(tick);
-}
-function status(){
- let message;
- if(chapter===0)message=revealCount?'This observation rules out possibilities that favored B. In this illustration, A now has stronger support.':'A useful observation can change which action looks best.';
- if(chapter===1)message=budget===0?'The budget is spent. Some outcomes are still unresolved.':longer+elsewhere===0?'You can wait for an answer, or spend that effort somewhere else.':`${6-budget} of 6 observation units spent. ${longer>=3?'Some outcomes have now been observed.':lastObservation==='elsewhere'?'A different observation is selected. Its outcome is still unresolved.':'Longer follow-up can still leave an outcome censored.'}`;
- if(chapter===2)message=structured?'The same observations now share a structure. What to preserve depends on what you need to answer.':'A collection of observations is not yet a useful representation.';
- if(chapter===3)message=correlated?'Repeating the same blind spot does not supply the missing evidence.':shared?'Different partial views can complement one another. How to combine them is part of the problem.':'Each agent has a partial view. Information must be exchanged before it can be combined.';
- if(chapter===4)message=support==='clear'?'Here the illustrative evidence separates the choices. In a real study, assumptions and evaluation still matter.':'The evidence does not yet distinguish the choices. Withholding a conclusion can be the right outcome.';
- $('#scene-result').textContent=message;
- $('#scene-title').textContent=sceneNames[chapter];$('#margin-note').innerHTML=sceneNotes[chapter];
- canvas.setAttribute('aria-label',sceneNames[chapter]+'. '+message+' Conceptual illustration, not measured research results.');
-}
-function goToChapter(index,focus=false){
- chapter=Math.max(0,Math.min(4,index));
- $$('.chapter').forEach((el,i)=>{el.classList.toggle('active',i===chapter);el.setAttribute('aria-hidden',String(i!==chapter));});
- $$('[data-go]').forEach((el,i)=>el.setAttribute('aria-current',i===chapter?'step':'false'));
- $('#previous').disabled=chapter===0;$('#next').innerHTML=chapter===4?'Back to the beginning <span>↺</span>':'Follow the question <span>→</span>';
- status();animate();if(innerWidth<=650)$('#story').scrollIntoView({behavior:paused?'instant':'smooth'});if(focus)$('#chapter-title-'+chapter).focus({preventScroll:true});
-}
-$$('[data-go]').forEach(button=>button.addEventListener('click',()=>goToChapter(+button.dataset.go)));
-$('#previous').addEventListener('click',()=>goToChapter(chapter-1,true));
-$('#next').addEventListener('click',()=>goToChapter(chapter===4?0:chapter+1,true));
-$('.chapter-tabs').addEventListener('keydown',event=>{if(!['ArrowRight','ArrowLeft','Home','End'].includes(event.key))return;event.preventDefault();let next=event.key==='Home'?0:event.key==='End'?4:(chapter+(event.key==='ArrowRight'?1:4))%5;goToChapter(next);$$('[data-go]')[next].focus();});
-$('#reveal').addEventListener('click',()=>{revealCount=revealCount?0:1;$('#reveal').innerHTML=revealCount?'Hide the observation <span>↶</span>':'Reveal an observation <span>↗</span>';status();animate();});
-function updateBudget(){ $('#budget-dots').textContent=Array.from({length:6},(_,i)=>i<budget?'●':'○').join(' ');$('#budget-count').textContent=budget+' remaining';$('#wait').disabled=!budget;$('#elsewhere').disabled=!budget;status();animate();}
-$('#wait').addEventListener('click',()=>{if(budget){budget--;longer++;lastObservation='wait';updateBudget();}});
-$('#elsewhere').addEventListener('click',()=>{if(budget){budget--;elsewhere++;lastObservation='elsewhere';updateBudget();}});
-$$('.reset-scene').forEach(b=>b.addEventListener('click',()=>{budget=6;longer=0;elsewhere=0;revealCount=0;$('#reveal').innerHTML='Reveal an observation <span>↗</span>';updateBudget();}));
-$('#structure').addEventListener('click',()=>{structured=!structured;$('#structure').innerHTML=structured?'Return to separate observations <span>↶</span>':'Find a shared structure <span>↗</span>';status();animate();});
-$('#share').addEventListener('click',()=>{shared=!shared;$('#share').innerHTML=shared?'Separate their views <span>↶</span>':'Let the agents share <span>↗</span>';status();animate();});
-$('#correlated').addEventListener('change',event=>{correlated=event.target.checked;status();animate();});
-$$('[data-support]').forEach(b=>b.addEventListener('click',()=>{support=b.dataset.support;$$('[data-support]').forEach(a=>a.setAttribute('aria-pressed',String(a===b)));status();animate();}));
-function motionLabel(){ document.documentElement.classList.toggle('motion-paused',paused);$('#motion').textContent=paused?'Enable transitions':'Pause transitions';$('#motion').setAttribute('aria-pressed',String(paused)); }
-$('#motion').addEventListener('click',()=>{paused=!paused;motionLabel();if(paused){cancelAnimationFrame(frame);target=positions();draw(1);}});motionLabel();
-new ResizeObserver(resize).observe(canvas.parentElement);
 
 // Each project gets a subject-specific illustration. All are conceptual drawings.
 const C={gold:'#e3b57b',blue:'#8aaec7',white:'#ccd9df',dim:'#6b8493'};
@@ -220,4 +110,3 @@ $('.dialog-close').addEventListener('click',()=>{dialog.close();if(returnFocus)r
 dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close();}});
 dialog.addEventListener('close',()=>{if(returnFocus)returnFocus.focus({preventScroll:true});});
 $$('[data-filter]').forEach(button=>button.addEventListener('click',()=>{const key=button.dataset.filter;let n=0;$$('.project').forEach(el=>{el.hidden=key!=='all'&&el.dataset.family!==key;if(!el.hidden)n++;});$$('[data-filter]').forEach(el=>el.setAttribute('aria-pressed',String(el===button)));$('#filter-status').textContent=n+' projects'+(key==='all'?'':' · '+button.textContent);}));
-status();resize();
