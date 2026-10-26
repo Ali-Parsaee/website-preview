@@ -34,15 +34,6 @@ $('#motion').addEventListener('click', () => { paused = !paused; motionLabel(); 
 motionLabel();
 if (labs) {
   labs.show(0);
-  // The first model starts learning on its own once the figure is on screen, unless motion is reduced.
-  if (!paused && 'IntersectionObserver' in window) {
-    const watch = new IntersectionObserver(entries => {
-      if (!entries.some(e => e.isIntersecting)) return;
-      watch.disconnect();
-      setTimeout(() => { if (chapter === 0 && !paused) labs.autoplay(0); }, 1400);
-    }, {threshold: .45});
-    watch.observe($('.world'));
-  }
 }
 
 // Each project gets a subject-specific illustration. All are conceptual drawings.
