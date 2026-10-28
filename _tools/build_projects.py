@@ -3,7 +3,7 @@ import html, os, sys
 sys.path.insert(0, os.path.dirname(__file__))
 from projects_content import P, CH
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-V = '7.2'
+V = '7.3'
 def page(p, prev, nxt):
     e = html.escape
     ch, chname = CH[p['fam']]

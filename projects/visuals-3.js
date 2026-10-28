@@ -72,7 +72,7 @@ V.personalization=api=>{const S={d:4,tau:3,n:2000};
       const bars=[['observed practice',p.prac,COL.white],['one treatment for everyone',p.uni,COL.B],['learned rule',p.learn,COL.green]];
       bars.forEach(([l,val,col],k)=>{const x=x0+(k*1.6+.4)*bw;rect(c,x,Y(val),bw,y1-Y(val),col,.8);txt(c,val.toFixed(1),x+bw/2,Y(val)-8,{size:13,col,align:'center',font:'serif'});mono(c,l,x+bw/2,y1+16,{align:'center',size:n?8:10});});
       const xu=x0+(1.6+.4)*bw,xl=x0+(3.2+.4)*bw;line(c,xu+bw+6,Y(p.prac),xu+bw+6,Y(p.uni),COL.B,2);line(c,xl+bw+6,Y(p.uni),xl+bw+6,Y(p.learn),COL.green,2);
-      txt(c,v,x1,y0-20,{size:20,font:'serif',align:'right',col:v==='personalize'?COL.green:v==='withhold the verdict'?COL.red:COL.B});
+      txt(c,v,x1,y0-20,{size:20,font:'serif',align:'right',col:v==='personalize'?COL.green:v==='withhold the verdict'?COL.red:COL.B});txt(c,`personalizing adds ${p.inc.toFixed(1)} points · 90% interval ${lo.toFixed(1)} to ${hi.toFixed(1)} · ${S.n.toLocaleString()} patients`,x1,y0+2,{size:11,font:'mono',align:'right',col:COL.dim});
       if(!n)hand(c,'the “dividend”: no\npersonalization needed',xu,Y(p.uni)-46,{size:14});mono(c,'simulated · outcome = % of patients with a good outcome',x0,h-14);return false;}};
 };
 
@@ -95,7 +95,17 @@ V.generalization=api=>{const S={k:2,net:'rule'};
     draw(c,w,h,n){const r=nets(S.k),net=S.net==='rule'?r.rule:r.lookup;
       if(S.k===2){const sz=n?Math.min(w-40,h*.5):Math.min(w*.42,h-80),x0=n?20:40,y0=40,G=40;for(let i=0;i<G;i++)for(let j=0;j<G;j++){const x=[-1.6+3.2*(i+.5)/G,1.6-3.2*(j+.5)/G],v=r.out(net,x);rect(c,x0+i*sz/G,y0+j*sz/G,sz/G+.5,sz/G+.5,v>0?COL.B:COL.A,.16);}
         r.pts.forEach(p=>{const X=x0+(p[0]+1.6)/3.2*sz,Y=y0+(1.6-p[1])/3.2*sz;dot(c,X,Y,9,r.lab(p)>0?COL.B:COL.A);});mono(c,'XOR: the decision regions this network draws',x0,y0-10);}
-      else{const x0=n?20:40;wrap(c,`With ${S.k} input bits there are ${2**S.k} inputs: too many to draw, but the costs below are exact for these two constructions.`,x0,60,n?w-40:w*.42,{size:13,col:COL.text});}
+      else{const k=S.k,x0=n?24:50,pw=n?w-48:w*.42,y0=60,ph=n?h*.42:h-130;
+        if(S.net==='rule'){// every input sits at its count of 1-bits; the rule network's output depends only on that count
+          const X=m=>x0+pw*m/k,zr=s2=>net.units.reduce((t,u)=>t+u.a*Math.max(0,s2+u.b),net.c),zs=[];for(let i=0;i<=200;i++){const s2=-k+2*k*i/200;zs.push([s2,zr(s2)]);}
+          const zmax=Math.max(...zs.map(q=>Math.abs(q[1])))||1,Y=z=>y0+ph/2-(ph/2-10)*z/zmax;line(c,x0,Y(0),x0+pw,Y(0),COL.axis,1,.8);
+          const cnt=Array(k+1).fill(0);r.pts.forEach(p=>{const m=p.filter(v=>v>0).length,j=cnt[m]++;const zc=Y(zr(2*m-k));dot(c,X(m)+((j%9)-4)*3.2,(r.lab(p)>0?zc+9+Math.floor(j/9)*6:zc-9-Math.floor(j/9)*6),2.4,r.lab(p)>0?COL.B:COL.A,.9);});
+          curve(c,zs.map(([s2,z])=>[X((s2+k)/2),Y(z)]),COL.green,2.4);for(let m=0;m<=k;m++)mono(c,String(m),X(m),y0+ph+16,{align:'center'});
+          mono(c,'number of 1-bits in the input →',x0+pw,y0+ph+32,{align:'right'});mono(c,`all ${2**k} inputs, grouped by count · green: network output`,x0,y0-12);
+          if(!n)hand(c,'the rule only needs\nthe count: a zigzag',x0+pw*.55,y0+12,{size:14});}
+        else{const nu=2**k,cols=Math.ceil(Math.sqrt(nu*1.6)),cs=Math.min(pw/cols,ph/Math.ceil(nu/cols));mono(c,`one hidden unit per input: ${nu} units`,x0,y0-12);
+          r.pts.forEach((p,i)=>rect(c,x0+(i%cols)*cs+1,y0+Math.floor(i/cols)*cs+1,cs-2,cs-2,r.lab(p)>0?COL.B:COL.A,.75));
+          if(!n)hand(c,'doubles with\nevery extra bit',x0+pw*.6,y0+ph*.75,{size:14});}}
       const bx=n?20:w*.55,by=n?h*.62:80,bw=n?w-40:w*.38,mx=Math.max(r.costL,r.costR);
       [['rule',r.costR,COL.green,r.rule.units.length],['lookup table',r.costL,COL.white,r.lookup.units.length]].forEach(([l,v,col,u],k)=>{rect(c,bx,by+k*44,bw*v/mx,20,col,.85);txt(c,`${l}: cost ${v.toFixed(1)}, ${u} units`,bx,by+k*44+38,{size:12,col});});
       mono(c,'sum of squared weights (what weight decay pays)',bx,by-10);return false;}};

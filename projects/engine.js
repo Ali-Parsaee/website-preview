@@ -37,7 +37,7 @@ function makeControls(el,request){let row=null;
   const api={
     row(cls){row=document.createElement('div');row.className='lab-row'+(cls?' '+cls:'');el.appendChild(row);return row;},
     button(label,onClick,o={}){if(!row)api.row();const b=document.createElement('button');b.className=o.quiet?'quiet':'experiment'+(o.primary?'':' secondary');b.innerHTML=label;b.addEventListener('click',()=>{onClick(b);request();});row.appendChild(b);return b;},
-    slider(label,o,onInput){const l=document.createElement('label');l.className='slider';const s=document.createElement('span');s.textContent=label;const i=document.createElement('input');i.type='range';i.min=o.min;i.max=o.max;i.step=o.step;i.value=o.value;
+    slider(label,o,onInput){const l=document.createElement('label');l.className='slider';const s=document.createElement('span');s.textContent=label;const i=document.createElement('input');i.type='range';i.min=o.min;i.max=o.max;i.step=o.step;i.setAttribute('value',o.value);i.value=o.value;
       const out=document.createElement('output');const fmt=o.fmt||(v=>v);out.textContent=fmt(+i.value);i.addEventListener('input',()=>{out.textContent=fmt(+i.value);onInput(+i.value);request();});
       l.append(s,i,out);el.appendChild(l);row=null;return{set(v){i.value=v;out.textContent=fmt(+v);},input:i};},
     choice(label,options,value,onChange){api.row();if(label){const s=document.createElement('span');s.className='lab-label';s.textContent=label;row.appendChild(s);}const g=document.createElement('span');g.className='segmented';g.setAttribute('role','group');
