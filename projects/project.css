@@ -1,0 +1,28 @@
+/* Project pages (2026-10-28, Claude). Builds on ../style.css. */
+.pj{max-width:1280px;margin:auto;padding:0 58px 60px}
+.pj-top{display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid var(--ink);padding:18px 0;font:10px/1.6 var(--mono);letter-spacing:1.2px;text-transform:uppercase}
+.pj-top a{color:var(--ink)}.pj-top a:hover{color:var(--rust)}
+.pj-head{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:48px;padding:38px 0 26px}
+.pj-label{display:flex;gap:16px;font:10px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin-bottom:22px}.pj-label span{color:var(--rust)}
+.pj h1{font:clamp(40px,4.6vw,66px)/1.04 var(--sans);letter-spacing:-2.4px;min-height:0;margin:0}
+.pj-q{font:italic 22px/1.4 var(--serif);color:var(--rust);margin-top:16px}
+.pj-meta{font-size:12px;line-height:1.75;color:var(--muted);border-left:1px solid var(--rule);padding-left:22px;align-self:end}
+.pj-meta .full{font:italic 14px/1.5 var(--serif);color:var(--ink);margin-bottom:10px}
+.pj-meta b{color:var(--ink);font-weight:600}
+.pj-meta .links{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px}.pj-meta .links a{color:var(--blue);font-size:12px}
+.pj-meta .status{font:10px var(--mono);letter-spacing:.8px;text-transform:uppercase;color:var(--rust);margin-bottom:8px}
+.pj-point{font:clamp(22px,2.3vw,30px)/1.38 var(--serif);letter-spacing:-.3px;max-width:960px;padding:8px 0 34px;border-bottom:1px solid var(--rule)}
+.pj .world{position:relative;top:auto;margin:34px 0 10px}
+.pj .canvas-wrap{height:clamp(420px,62vh,600px)}
+.pj-caption{font-size:12px;color:var(--muted);margin:0 0 34px}
+.pj-cols{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;padding:10px 0 30px}
+.pj-cols h2{font:10px var(--mono);letter-spacing:1.4px;text-transform:uppercase;color:var(--rust);margin-bottom:12px}
+.pj-cols p,.pj-cols li{font-size:15px;line-height:1.7}.pj-cols ul{margin:0;padding-left:18px}.pj-cols li+li{margin-top:8px}
+.pj .deeper{max-width:760px}
+.pj-fit{display:flex;flex-wrap:wrap;gap:10px 24px;border-top:1px solid var(--rule);padding-top:16px;font-size:13px}
+.pj-fit a{color:var(--blue)}
+.pj-unpub{background:#e4dfd3;border-left:2px solid var(--rust);padding:10px 14px;font-size:13px;margin:0 0 20px;max-width:760px}
+.pj-nav{display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--ink);margin-top:40px;padding-top:18px;font-size:13px}
+.pj-nav a{color:var(--ink)}.pj-nav a:hover{color:var(--rust)}.pj-nav small{display:block;font:9px var(--mono);letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+@media(max-width:900px){.pj{padding:0 22px 40px}.pj-head{grid-template-columns:1fr;gap:20px}.pj-meta{border-left:0;padding-left:0}.pj-cols{grid-template-columns:1fr;gap:24px}.pj .canvas-wrap{height:500px}}
+.pj .canvas-wrap canvas{display:block;width:100%;height:100%;position:absolute;inset:0;cursor:crosshair}

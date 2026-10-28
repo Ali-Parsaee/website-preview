@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Wisdom of the Machines · Ali Parsaee</title><meta name="description" content="A crowd of language models is wise when its members are different models. Sampling one model many times repeats that model’s mistakes.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23172331'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='%23a54731'/%3E%3Ccircle cx='16' cy='16' r='2.3' fill='%23eeeae2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css?v=7.2"><link rel="stylesheet" href="project.css?v=7.2">
+<script src="engine.js?v=7.2" defer></script><script src="visuals-1.js?v=7.2" defer></script><script src="visuals-2.js?v=7.2" defer></script><script src="visuals-3.js?v=7.2" defer></script>
+</head><body><main class="pj">
+<nav class="pj-top"><a href="../index.html">← Ali Parsaee</a><a href="../index.html#research">All projects</a></nav>
+<header class="pj-head"><div><p class="pj-label"><span>04</span>Collective intelligence</p><h1>Wisdom of the Machines</h1><p class="pj-q">What can a diverse crowd of models know together?</p></div>
+<div class="pj-meta"><p class="status">AAMAS 2026 · Paphos, Cyprus</p><p class="full">Wisdom of the Machines: Exploring Collective Intelligence in LLM Crowds</p><p>Yashar Talebirad*, <b>Ali Parsaee</b>*, Vishwajeet Ohal, Amirhossein Nadiri, Csongor Szepesvári, Yash Mouje, Eden Redman<br>* equal contribution</p><div class="links"><a href="https://openreview.net/forum?id=fxqroxvUhk">Read the paper ↗</a></div></div></header>
+<p class="pj-point">A crowd of language models is wise when its members are different models. Sampling one model many times repeats that model’s mistakes.</p>
+<figure class="world" data-visual="crowds"><div class="world-top"><span>Wisdom of the Machines: try it</span></div>
+<div class="canvas-wrap"><canvas role="img" aria-label="Interactive illustration. Its current state is described below."></canvas></div>
+<p class="scene-result" aria-live="polite"></p><div class="lab-panel"><div class="lab-controls"></div></div>
+<figcaption><span class="legend"></span><span>Working model · details below</span></figcaption></figure>
+<p class="pj-caption">Simulated crowd: each model has its own bias, and temperature adds noise around it. The 68% figure is from the paper.</p>
+<section class="pj-cols"><div><h2>The problem</h2><p>Averaging many independent human guesses often beats any individual: the “wisdom of crowds”. Large language models can produce many guesses cheaply, but it was unclear how to form a useful crowd from them.</p></div><div><h2>What we did</h2><p>We compared two sources of diversity on vision-based estimation tasks: response diversity, from sampling one model at several temperatures, and model diversity, from asking different models. The datasets were people’s height and weight from photos, small objects with known weights, and Amazon products with their prices.</p></div><div><h2>What we found</h2><ul><li>Aggregating temperature-0 answers from a diverse set of models was the most effective strategy, and it outperformed any single model.</li><li>Temperature-induced diversity gave no significant benefit while increasing inference cost.</li><li>The median of deterministic answers from several models beat 68% of individual guesses on average.</li><li>Context helped where it was directly informative, such as product titles for price estimation.</li></ul></div></section>
+<details class="deeper"><summary>Go deeper</summary><p>The median is robust to a few wild answers, which matters because language models occasionally misread an image badly. Model diversity works because different models were trained differently and so err in different directions; their errors partly cancel.</p></details>
+<div class="pj-fit"><a href="../index.html#chapter-3">Part of the story: Collaborate ↗</a><a href="../index.html#research">All projects ↗</a></div>
+<nav class="pj-nav"><a href="generalization.html"><small>Previous</small>← Generalization versus memorization</a><a href="memory.html" style="text-align:right"><small>Next</small>Hierarchical memory for language agents →</a></nav>
+</main></body></html>

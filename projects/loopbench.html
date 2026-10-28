@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LoopBench · Ali Parsaee</title><meta name="description" content="Identical agents that each act sensibly can lock into an endless loop together. Escaping it takes an agent that reflects on its own history and changes its rule.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23172331'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='%23a54731'/%3E%3Ccircle cx='16' cy='16' r='2.3' fill='%23eeeae2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css?v=7.2"><link rel="stylesheet" href="project.css?v=7.2">
+<script src="engine.js?v=7.2" defer></script><script src="visuals-1.js?v=7.2" defer></script><script src="visuals-2.js?v=7.2" defer></script><script src="visuals-3.js?v=7.2" defer></script>
+</head><body><main class="pj">
+<nav class="pj-top"><a href="../index.html">← Ali Parsaee</a><a href="../index.html#research">All projects</a></nav>
+<header class="pj-head"><div><p class="pj-label"><span>09</span>Collective intelligence</p><h1>LoopBench</h1><p class="pj-q">What can emerge from a swarm’s interactions?</p></div>
+<div class="pj-meta"><p class="status">Preprint · arXiv 2025</p><p class="full">LoopBench: Discovering Emergent Symmetry Breaking Strategies with LLM Swarms</p><p><b>Ali Parsaee</b>, Yashar Talebirad, Csongor Szepesvári, Vishwajeet Ohal, Eden Redman<br>First author</p><div class="links"><a href="https://arxiv.org/abs/2512.13713">Read the paper (arXiv) ↗</a></div></div></header>
+<p class="pj-point">Identical agents that each act sensibly can lock into an endless loop together. Escaping it takes an agent that reflects on its own history and changes its rule.</p>
+<figure class="world" data-visual="loopbench"><div class="world-top"><span>LoopBench: try it</span></div>
+<div class="canvas-wrap"><canvas role="img" aria-label="Interactive illustration. Its current state is described below."></canvas></div>
+<p class="scene-result" aria-live="polite"></p><div class="lab-panel"><div class="lab-controls"></div></div>
+<figcaption><span class="legend"></span><span>Working model · details below</span></figcaption></figure>
+<p class="pj-caption">Simulated agents with hand-written rules. Benchmark numbers are from the paper.</p>
+<section class="pj-cols"><div><h2>The problem</h2><p>Language models are increasingly used as autonomous agents, but little is known about whether independent agents, each with a local view, can invent the strategies needed to coordinate without a central controller.</p></div><div><h2>What we did</h2><p>We built a benchmark around colouring odd rings (3, 5 and 11 nodes) with two colours. A perfect colouring is impossible, and simple greedy agents oscillate forever. Each node is an LLM agent that sees its local history and can pass a short note of strategy to its future self.</p></div><div><h2>What we found</h2><ul><li>Advanced reasoning models (O3) devised strategies to escape the deadlock. On the 5-node ring O3 scored 57.5% proximity to the best colouring with 100% stability.</li><li>GPT-4.1 Nano agents scored 4.4% proximity on the same ring.</li><li>Classical heuristics struggled, revealing a measurable reasoning gap between classes of models.</li></ul></div></section>
+<details class="deeper"><summary>Go deeper</summary><p>The benchmark tests meta-cognitive reasoning: thinking narrowly leads to deadlock, and the solution only appears when an agent steps back and questions its own rule.</p></details>
+<div class="pj-fit"><a href="../index.html#chapter-3">Part of the story: Collaborate ↗</a><a href="../index.html#research">All projects ↗</a></div>
+<nav class="pj-nav"><a href="media.html"><small>Previous</small>← Learning what to grow</a><a href="signals.html" style="text-align:right"><small>Next</small>From Signals to Structure →</a></nav>
+</main></body></html>

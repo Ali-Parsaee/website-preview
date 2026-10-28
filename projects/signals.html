@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>From Signals to Structure · Ali Parsaee</title><meta name="description" content="Whether two agents invent a stable shared language depends more on how they remember than on how much they can say.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23172331'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='%23a54731'/%3E%3Ccircle cx='16' cy='16' r='2.3' fill='%23eeeae2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css?v=7.2"><link rel="stylesheet" href="project.css?v=7.2">
+<script src="engine.js?v=7.2" defer></script><script src="visuals-1.js?v=7.2" defer></script><script src="visuals-2.js?v=7.2" defer></script><script src="visuals-3.js?v=7.2" defer></script>
+</head><body><main class="pj">
+<nav class="pj-top"><a href="../index.html">← Ali Parsaee</a><a href="../index.html#research">All projects</a></nav>
+<header class="pj-head"><div><p class="pj-label"><span>13</span>Collective intelligence</p><h1>From Signals to Structure</h1><p class="pj-q">How does memory shape the emergence of language?</p></div>
+<div class="pj-meta"><p class="status">ALIFE 2026</p><p class="full">From Signals to Structure: How Memory Architecture Drives Language Emergence in LLM Agents</p><p>Yashar Talebirad, Eden Redman, <b>Ali Parsaee</b>, Osmar R. Zaïane</p><div class="links"><a href="https://doi.org/10.1162/isal.a.1045">Read the paper ↗</a><a href="https://arxiv.org/abs/2607.00233">arXiv ↗</a></div></div></header>
+<p class="pj-point">Whether two agents invent a stable shared language depends more on how they remember than on how much they can say.</p>
+<figure class="world" data-visual="signals"><div class="world-top"><span>From Signals to Structure: try it</span></div>
+<div class="canvas-wrap"><canvas role="img" aria-label="Interactive illustration. Its current state is described below."></canvas></div>
+<p class="scene-result" aria-live="polite"></p><div class="lab-panel"><div class="lab-controls"></div></div>
+<figcaption><span class="legend"></span><span>Working model · details below</span></figcaption></figure>
+<p class="pj-caption">A toy version of the game with simple learning agents, not LLMs. The accuracy figures quoted are the paper’s.</p>
+<section class="pj-cols"><div><h2>The problem</h2><p>In a Lewis signalling game, a sender sees a target among several objects and sends a signal; a receiver must pick the target from the signal alone. With no agreed meanings, any consistent success means the pair has invented a small language.</p></div><div><h2>What we did</h2><p>We compared five memory architectures for LLM agents across channel sizes, from stateless agents with a rolling context window to agents with a persistent private notebook.</p></div><div><h2>What we found</h2><ul><li>Memory architecture mattered more than channel capacity.</li><li>Agents with a persistent notebook coordinated most reliably: 0.867 ± 0.023 at a capacity of 25 signals.</li><li>Stateless agents peaked at moderate capacity, then degraded as the vocabulary outgrew their window.</li><li>Capacity equal to the number of objects (8), which an information-bottleneck argument predicts as optimal, was instead a fragile point.</li></ul></div></section>
+<details class="deeper"><summary>Go deeper</summary><p>Notebooks have their own failure mode: agents sometimes revise an established mapping in the middle of a game, which breaks the convention the partner relies on.</p></details>
+<div class="pj-fit"><a href="../index.html#chapter-3">Part of the story: Collaborate ↗</a><a href="../index.html#research">All projects ↗</a></div>
+<nav class="pj-nav"><a href="loopbench.html"><small>Previous</small>← LoopBench</a><a href="communication.html" style="text-align:right"><small>Next</small>Memory Is Communication →</a></nav>
+</main></body></html>

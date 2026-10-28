@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Risk after radiation therapy · Ali Parsaee</title><meta name="description" content="Registry data can train a sensitive screening model that flags most patients at risk of early death after radiation therapy, so they get closer monitoring.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23172331'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='%23a54731'/%3E%3Ccircle cx='16' cy='16' r='2.3' fill='%23eeeae2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css?v=7.2"><link rel="stylesheet" href="project.css?v=7.2">
+<script src="engine.js?v=7.2" defer></script><script src="visuals-1.js?v=7.2" defer></script><script src="visuals-2.js?v=7.2" defer></script><script src="visuals-3.js?v=7.2" defer></script>
+</head><body><main class="pj">
+<nav class="pj-top"><a href="../index.html">← Ali Parsaee</a><a href="../index.html#research">All projects</a></nav>
+<header class="pj-head"><div><p class="pj-label"><span>20</span>Evidence &amp; decisions</p><h1>Risk after radiation therapy</h1><p class="pj-q">Predicting severe adverse events from clinical records.</p></div>
+<div class="pj-meta"><p class="status">ASTRO Annual Meeting 2026 · abstract</p><p class="full">Development of a Post-Radiation “Safety Net”: A Machine Learning Approach to Predicting Severe Adverse Events Using the SEER Database</p><p><b>A. Parsaee</b>, K. G. Samuel, N. Mohan, P. Wong<br>First author</p><div class="links"><a href="https://doi.org/10.1016/j.ijrobp.2026.06.1229">Read the abstract ↗</a></div></div></header>
+<p class="pj-point">Registry data can train a sensitive screening model that flags most patients at risk of early death after radiation therapy, so they get closer monitoring.</p>
+<figure class="world" data-visual="radiation"><div class="world-top"><span>Risk after radiation therapy: try it</span></div>
+<div class="canvas-wrap"><canvas role="img" aria-label="Interactive illustration. Its current state is described below."></canvas></div>
+<p class="scene-result" aria-live="polite"></p><div class="lab-panel"><div class="lab-controls"></div></div>
+<figcaption><span class="legend"></span><span>Working model · details below</span></figcaption></figure>
+<p class="pj-caption">Simulated patients, tuned so the operating point matches the paper’s recall and precision.</p>
+<section class="pj-cols"><div><h2>The problem</h2><p>Severe complications after radiation therapy need early attention, and value-based care programs need a way to prioritize monitoring. Early mortality within three months serves as a proxy for severe acute adverse events.</p></div><div><h2>What we did</h2><p>We analysed 235,035 patients treated with radiation in the US SEER database (2010–2022), using nine patient-reportable variables across medical, socioeconomic and metadata domains. We compared classifiers and Cox survival models, and a global model against site-specific models for lung, breast and prostate cancer.</p></div><div><h2>What we found</h2><ul><li>Early mortality affected 4% of patients. A gradient boosting classifier flagged 92% of them (recall 0.92) at precision 0.10, an acceptable trade-off for a safety net.</li><li>The global Cox model reached a C-index of 0.80; within individual sites it averaged 0.76, and site-specific models recovered 0.78.</li><li>Age, income and marital status were significant independent predictors.</li></ul></div></section>
+<details class="deeper"><summary>Go deeper</summary><p>Next steps are Statistics Canada data with actual radiation-related adverse events, richer socioeconomic features, and multicentre validation on independent records before clinical use.</p></details>
+<div class="pj-fit"><a href="../index.html#chapter-4">Part of the story: Decide ↗</a><a href="../index.html#research">All projects ↗</a></div>
+<nav class="pj-nav"><a href="crohns.html"><small>Previous</small>← Predicting bowel resection in Crohn’s disease</a><a href="robot.html" style="text-align:right"><small>Next</small>Learning on a real robot →</a></nav>
+</main></body></html>
