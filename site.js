@@ -98,7 +98,7 @@ function artFor(kind){
 $$('.project-art').forEach(el=>el.insertAdjacentHTML('afterbegin',artFor(el.dataset.art)));
 const dialog=$('#project-dialog');let returnFocus=null;
 // Papers have their own page with a visual explanation; other projects open in the dialog.
-const PROJECT_PAGES=new Set(["survival",   "crowds", "memory",   "media", "loopbench", "signals", "communication", "cooperative", "crohns", "radiation", "robot", "biology"]);
+const PROJECT_PAGES=new Set(["survival","causal","generalization","crowds","memory","compute","personalization","media","loopbench","signals","communication","cooperative","crohns","radiation","robot","biology"]);
 function openProject(id,trigger){if(PROJECT_PAGES.has(id)){location.href='projects/'+id+'.html';return;}const project=$('#project-'+id);if(!project)return;if(!dialog.showModal){project.open=true;project.scrollIntoView();return;}returnFocus=trigger;$('#dialog-content').innerHTML=project.querySelector('.project-art').outerHTML+project.querySelector('.project-heading').outerHTML+project.querySelector('.project-detail').outerHTML;$('#dialog-content h3').id='dialog-title';const arrow=$('#dialog-content h3 [aria-hidden]');if(arrow)arrow.remove();dialog.showModal();$('.dialog-close').focus();}
 $$('[data-project]').forEach(el=>el.addEventListener('click',event=>{event.preventDefault();openProject(el.dataset.project,el);}));
 $$('[data-open]').forEach(el=>el.addEventListener('click',event=>{event.preventDefault();openProject(el.dataset.open,el);}));

@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en"><head><meta name="robots" content="noindex, nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Spend Compute Where Errors Propagate · Ali Parsaee</title><meta name="description" content="When a hard problem is split into dependent sub-problems, a mistake high in the structure corrupts everything built on it. Extra computation should go where errors propagate.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23172331'/%3E%3Ccircle cx='16' cy='16' r='6.5' fill='%23a54731'/%3E%3Ccircle cx='16' cy='16' r='2.3' fill='%23eeeae2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../style.css?v=7.3"><link rel="stylesheet" href="project.css?v=7.3">
+<script src="engine.js?v=7.3" defer></script><script src="visuals-1.js?v=7.3" defer></script><script src="visuals-2.js?v=7.3" defer></script><script src="visuals-3.js?v=7.3" defer></script>
+</head><body><main class="pj">
+<nav class="pj-top"><a href="../index.html">← Ali Parsaee</a><a href="../index.html#research">All projects</a></nav>
+<header class="pj-head"><div><p class="pj-label"><span>06</span>Collective intelligence</p><h1>Spend Compute Where Errors Propagate</h1><p class="pj-q">Where should another unit of computation go?</p></div>
+<div class="pj-meta"><p class="status">Under review</p><p class="full">Spend Compute Where Errors Propagate</p><p><b>Ali Parsaee</b>, Yashar Talebirad<br>First author</p><div class="links"></div></div></header>
+<p class="pj-point">When a hard problem is split into dependent sub-problems, a mistake high in the structure corrupts everything built on it. Extra computation should go where errors propagate.</p>
+<figure class="world" data-visual="compute"><div class="world-top"><span>Spend Compute Where Errors Propagate: try it</span></div>
+<div class="canvas-wrap"><canvas role="img" aria-label="Interactive illustration. Its current state is described below."></canvas></div>
+<p class="scene-result" aria-live="polite"></p><div class="lab-panel"><div class="lab-controls"></div></div>
+<figcaption><span class="legend"></span><span>Working model · details below</span></figcaption></figure>
+<p class="pj-caption">Simulation of the idea on small dependency trees. Sub-problem error falls with more samples; a wrong answer corrupts everything below it.</p>
+<p class="pj-unpub">This manuscript is under review. This page explains the question and the idea; results will be added once the paper is public.</p><section class="pj-cols"><div><h2>The problem</h2><p>AI systems often break a problem into a plan, sub-plans and steps, sample several answers at each step, and aggregate them by voting or with a verifier. In common practice every step gets the same number of samples, whatever depends on it.</p></div><div><h2>What we did</h2><p>The project formalizes the expected amount of corrupted work and derives how a fixed sampling budget should be divided across the dependency structure.</p></div><div><h2>What we found</h2><ul><li>The results are under review and will be posted when the paper is public.</li></ul></div></section>
+<details class="deeper"><summary>Go deeper</summary><p>Whether structure-aware allocation helps depends on how errors are scored. If any single mistake ruins the whole answer, the structure stops mattering; if partial work keeps its value, it matters a great deal.</p></details>
+<div class="pj-fit"><a href="../index.html#chapter-3">Part of the story: Collaborate ↗</a><a href="../index.html#research">All projects ↗</a></div>
+<nav class="pj-nav"><a href="memory.html"><small>Previous</small>← Hierarchical memory for language agents</a><a href="personalization.html" style="text-align:right"><small>Next</small>Is personalization worth it? →</a></nav>
+</main></body></html>
