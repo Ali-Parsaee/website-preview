@@ -1,2 +1,3 @@
 .backups/
 _tools/__pycache__/
+.DS_Store

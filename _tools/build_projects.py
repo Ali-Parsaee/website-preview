@@ -35,6 +35,7 @@ def page(p, prev, nxt):
 <nav class="pj-nav"><a href="{prev["id"]}.html"><small>Previous</small>← {e(prev["title"])}</a><a href="{nxt["id"]}.html" style="text-align:right"><small>Next</small>{e(nxt["title"])} →</a></nav>
 </main></body></html>
 '''
+P = [p for p in P if p['kind'] != 'manuscript'] if os.environ.get('PREVIEW') else P
 for i, p in enumerate(P):
     out = os.path.join(ROOT, 'projects', p['id'] + '.html')
     open(out, 'w', encoding='utf-8').write(page(p, P[i - 1], P[(i + 1) % len(P)]))
